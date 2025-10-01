@@ -32,9 +32,8 @@ Here are some projects I have worked on:
 - **Others:** Digital System Design, Dashboard Design, Automation
 
 ## Contact Me
-- 📧 Email: [your-email@example.com](mailto:your-email@example.com)
-- 🌐 LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
-- 🐱 GitHub: [github.com/your-username](https://github.com/your-username)
+- 📧 Email: [your-email@example.com](mailto:bharanisri73@gmail.com)
+- 🐱 GitHub: [github.com/your-username](https://github.com/bharani-01)
 
 ---
 
