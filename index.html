@@ -4,187 +4,1029 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bharani | Cyber & IoT Engineer</title>
-    <!-- Load Tailwind CSS -->
+    <!-- Load Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide icons for visual elements -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Custom styles for the Inter font, dark theme, and smooth scrolling */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
+        /* Define Inter font and set fallback */
+        :root {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark gray (Tailwind gray-900) */
-            line-height: 1.7;
-            color: #d1d5db; /* Light gray text */
         }
-        .text-accent {
-            color: #6366f1; /* Tailwind 'indigo-500' for a sleek, tech accent */
+        /* Custom scroll behavior for smooth navigation */
+        html {
+            scroll-behavior: smooth;
         }
-        .card-bg {
-            background-color: #1f2937; /* Dark card background (Tailwind gray-800) */
+        /* Style for the fixed header */
+        .header-bg {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: transform 0.3s ease;
         }
-        .separator {
-            height: 3px;
-            width: 80px;
-            background-color: #6366f1;
-            margin: 1rem 0 2rem 0;
+        /* Custom styling for a focus ring color */
+        .focus-ring-indigo:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4);
+        }
+
+        /* === ADVANCED ANIMATION KEYFRAMES === */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(99, 102, 241, 0.8);
+            }
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* === HERO SECTION ADVANCED ANIMATIONS === */
+        .animated-gradient {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        .hero-avatar {
+            animation: float 6s ease-in-out infinite, fadeInScale 1s ease-out;
+        }
+
+        .hero-avatar:hover {
+            animation: float 3s ease-in-out infinite, pulse-glow 2s ease-in-out infinite;
+        }
+
+        .typewriter-text {
+            overflow: hidden;
+            border-right: 3px solid #fff;
+            white-space: nowrap;
+            animation: typewriter 2s steps(40) 1s forwards, blink 0.75s step-end infinite;
+        }
+
+        .hero-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* === SCROLL REVEAL ANIMATIONS === */
+        .scroll-reveal {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-reveal.animate-in {
+            visibility: visible;
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+
+        .scroll-reveal-left {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-reveal-left.animate-in {
+            visibility: visible;
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .scroll-reveal-right {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-reveal-right.animate-in {
+            visibility: visible;
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        /* === PROFESSIONAL MICRO-INTERACTIONS === */
+        .card-hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .link-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #4f46e5;
+            transition: width 0.3s ease;
+        }
+
+        .link-underline:hover::after {
+            width: 100%;
+        }
+
+        /* === SECTION TITLE ANIMATION === */
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 4px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            transition: width 0.6s ease;
+        }
+
+        .section-title.animate-in::before {
+            width: 100%;
+        }
+
+        /* === PARTICLE BACKGROUND === */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particleFloat 20s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* === SKILL BADGE ANIMATION === */
+        .skill-badge {
+            display: inline-block;
+            background-color: #e0e7ff;
+            color: #4338ca;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.75rem;
             border-radius: 9999px;
-        }
-        .main-container {
-            max-width: 1200px;
-        }
-        /* Project card hover effect */
-        .project-card-hover {
+            margin-bottom: 0.5rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
-        .project-card-hover:hover {
-            transform: translateY(-5px);
-            /* Custom shadow with accent color */
-            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3), 0 4px 6px -2px rgba(99, 102, 241, 0.1);
+
+        .skill-badge:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* === PROJECT CARD FLIP ANIMATION === */
+        .project-grid {
+            perspective: 1000px;
+        }
+        .project-card {
+            min-height: 350px;
+            background-color: transparent;
+        }
+        .project-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 0.7s;
+            transform-style: preserve-3d;
+        }
+        .project-card:hover .project-card-inner {
+            transform: rotateY(180deg);
+        }
+        .project-card-front, .project-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .project-card-back {
+            transform: rotateY(180deg);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-gray-50 text-gray-800 antialiased">
 
-    <!-- Main Content Container (Simulates the Dashboard Panel) -->
-    <main class="min-h-screen flex justify-center p-4 sm:p-8">
-        <div class="main-container w-full card-bg shadow-2xl rounded-3xl p-6 sm:p-12 mt-8 mb-8">
-
-            <!-- Header & Identity Section -->
-            <header class="mb-12 border-b border-gray-700 pb-8">
-                <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-100 leading-tight">
-                    Hello, I'm <span class="text-accent">Bharani</span>
-                </h1>
-                <p class="text-2xl sm:text-3xl font-light text-gray-400 mt-3">
-                    <span class="text-accent">2nd-Year Cyber & IoT Engineering Student</span>
-                </p>
-                <div class="separator"></div>
-
-                <!-- Core Bio -->
-                <p class="text-gray-300 text-lg sm:text-xl max-w-4xl">
-                    I'm passionate about building **intelligent, practical systems** that solve real-world problems. 
-                    I specialize in **IoT, AI, web development, and software engineering**, and I enjoy taking projects from concept to deployment.
-                </p>
-            </header>
-
-            <!-- Key Skills Dashboard Widget -->
-            <section class="mb-12 p-6 rounded-2xl bg-gray-900 border border-gray-700 shadow-xl">
-                <h2 class="text-2xl font-bold text-gray-100 mb-6 flex items-center">
-                    <!-- Icon for Skills (Lightning Bolt) -->
-                    <svg class="w-6 h-6 mr-3 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    Core Technical Skills
-                </h2>
-                <!-- Skill Chips -->
-                <div class="flex flex-wrap gap-3">
-                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">IoT & Embedded Systems</span>
-                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">AI / Machine Learning (YOLOv8)</span>
-                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">Python & Data Processing</span>
-                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">Java & Backend Development</span>
-                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">Web Development (HTML/CSS/Tailwind)</span>
-                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">OCR (EasyOCR, CTC Loss)</span>
-                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">System Design & ERP</span>
-                </div>
-            </section>
+    <!-- ⚡ 1. Navigation Bar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 shadow-md header-bg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-extrabold text-indigo-600 tracking-wider hover:text-indigo-800 transition duration-150">Bharani</a>
             
-            <!-- Projects & Research Highlights Section -->
-            <section class="mb-12">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-100 mb-8 flex items-center">
-                    <!-- Icon for Projects (Gears) -->
-                    <svg class="w-8 h-8 mr-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.38-.458.919-.661 1.344-.457l.08.03c.535.253.791.802.663 1.365l-.46 2.115a.965.965 0 01-1.378.718l-1.41-1.41a.965.965 0 00-1.378 0l-1.41 1.41a.965.965 0 01-1.378-.718l-.46-2.115c-.128-.563.128-1.112.663-1.365l.08-.03c.425-.204.964-.001 1.344.457l.458.55a.965.965 0 001.378 0l.458-.55zM12 17a5 5 0 100-10 5 5 0 000 10zM12 2a10 10 0 100 20 10 10 0 000-20z"></path></svg>
-                    Projects & Research Highlights
-                </h2>
+            <!-- Desktop Navigation Links -->
+            <div class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600 transition duration-150">About</a>
+                <a href="#projects" class="nav-link text-gray-700 hover:text-indigo-600 transition duration-150">Projects</a>
+                <a href="#research" class="nav-link text-gray-700 hover:text-indigo-600 transition duration-150">Research</a>
+                <a href="#skills" class="nav-link text-gray-700 hover:text-indigo-600 transition duration-150">Skills</a>
+                <a href="#contact" class="nav-link bg-indigo-600 text-white px-3 py-1 rounded-full hover:bg-indigo-700 transition duration-150 shadow-md">Contact</a>
+            </div>
 
-                <!-- Projects Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2 text-gray-700 hover:text-indigo-600 transition duration-150 rounded-lg">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-white shadow-xl border-t border-gray-100 pb-4">
+            <div class="flex flex-col space-y-2 px-4 pt-2 text-base font-medium">
+                <a href="#about" class="mobile-nav-link p-2 rounded-lg hover:bg-gray-100 transition duration-150">About</a>
+                <a href="#projects" class="mobile-nav-link p-2 rounded-lg hover:bg-gray-100 transition duration-150">Projects</a>
+                <a href="#research" class="mobile-nav-link p-2 rounded-lg hover:bg-gray-100 transition duration-150">Research</a>
+                <a href="#skills" class="mobile-nav-link p-2 rounded-lg hover:bg-gray-100 transition duration-150">Skills</a>
+                <a href="#contact" class="mobile-nav-link p-2 rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150">Contact</a>
+            </div>
+        </div>
+    </header>
 
-                    <!-- Project Card: SENTINEL -->
-                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
-                        <span class="text-sm font-semibold text-accent mb-2 block">IoT & AI Integration</span>
-                        <h3 class="text-xl font-bold text-gray-100 mb-3">SENTINEL – Smart Campus Surveillance</h3>
-                        <p class="text-gray-400 text-sm">
-                            Designed and implemented a vehicle tracking system using **IoT devices**, **YOLOv8** for license plate detection, and **EasyOCR**. Features real-time dashboards and event logging.
-                        </p>
+    <main class="pt-20">
+        
+        <!-- 1. Homepage (Hero Section) - ENHANCED WITH ADVANCED ANIMATIONS -->
+        <section id="home" class="h-screen flex items-center justify-center animated-gradient border-b border-gray-100 relative overflow-hidden">
+            <!-- Particle Background -->
+            <div class="particles" id="particles-container"></div>
+            
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20 relative z-10">
+                <div class="mb-8 flex justify-center">
+                    <!-- Professional Photo/Avatar with Float Animation -->
+                    <img src="https://placehold.co/160x160/6366f1/ffffff?text=Bharani" 
+                         alt="Professional Avatar" 
+                         class="w-40 h-40 rounded-full object-cover shadow-2xl ring-4 ring-white hero-avatar"
+                         style="animation-delay: 0.2s;">
+                </div>
+                
+                <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tighter text-white leading-tight mb-4 hero-reveal"
+                    style="animation-delay: 0.4s;">
+                    Hi, I'm <span class="typewriter-text inline-block">Bharani</span>
+                </h1>
+                
+                <p class="text-xl sm:text-2xl font-medium text-white/90 mb-8 hero-reveal"
+                   style="animation-delay: 1.2s;">
+                    Cyber & IoT Engineer | AI, Web & Intelligent Systems Developer
+                </p>
+
+                <p class="max-w-3xl mx-auto text-lg text-white/80 mb-10 hero-reveal backdrop-blur-sm bg-white/10 p-6 rounded-2xl"
+                   style="animation-delay: 1.4s;">
+                    I build intelligent systems combining <strong>AI, IoT, and software engineering</strong>. From developing scalable ERP software to creating AI-driven surveillance solutions, I enjoy solving real-world problems with robust, hands-on, and scalable technologies.
+                </p>
+
+                <a href="#projects" 
+                   class="inline-flex items-center px-8 py-3 border-2 border-white text-base font-semibold rounded-full shadow-lg text-white bg-white/10 backdrop-blur-sm hover:bg-white hover:text-indigo-600 transition-all duration-300 transform hover:scale-105 focus-ring-indigo hero-reveal"
+                   style="animation-delay: 1.6s;">
+                    See My Work 
+                    <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 hero-reveal" style="animation-delay: 1.8s;">
+                <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+                    <div class="w-1 h-3 bg-white/70 rounded-full mt-2 animate-bounce"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- General Section Container Styling -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+
+            <!-- 2. About Me Section -->
+            <section id="about" class="mb-24 scroll-reveal">
+                <h2 class="text-4xl font-extrabold text-indigo-600 mb-6 section-title">About Me</h2>
+                <div class="bg-white p-8 md:p-12 rounded-xl shadow-lg border border-gray-100 card-hover-lift">
+                    <p class="text-lg text-gray-700 mb-6">
+                        As a final-year student specializing in <strong>Cyber & IoT Engineering</strong>, my journey has been driven by a passion for connecting the physical and digital worlds. I don't just study technology; I build with it. My background involves extensive hands-on project work that seamlessly blends <strong>AI/ML</strong> for intelligent decision-making, <strong>IoT</strong> for data acquisition, and <strong>full-stack web development</strong> for seamless system integration.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-6">
+                        My practical experience is validated by major projects like the <strong>SIH ERP software</strong> solution, which demanded high-level systems thinking and collaborative development. This work, combined with my research publications, showcases my ability to transition complex theoretical concepts into credible, deployable solutions.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4">Core Competencies:</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 text-base list-none">
+                        <li class="flex items-start">
+                            <i data-lucide="cpu" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <strong>Intelligent Systems:</strong> AI/ML model development, object detection (YOLOv8), Optical Character Recognition (OCR), and data pipeline management.
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="zap" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <strong>IoT & Embedded:</strong> Practical experience with Arduino, ESP32, and various sensor integrations for real-time monitoring and control.
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="code" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <strong>Software Engineering:</strong> Proficient in Python, Java, and developing full-stack web solutions (HTML, CSS, JS, Flask/Django).
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="database" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <strong>Enterprise Systems:</strong> Experience building and customizing ERP solutions, emphasizing scalability and user-centric design.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. Projects Section -->
+            <section id="projects" class="mb-24">
+                <h2 class="text-4xl font-extrabold text-indigo-600 mb-10 section-title scroll-reveal">Featured Projects</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 project-grid">
+
+                    <!-- Project Card 1: SENTINEL -->
+                    <div class="project-card scroll-reveal">
+                        <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
+                            <div class="project-card-front bg-white p-6 rounded-xl">
+                                <div>
+                                    <i data-lucide="shield-check" class="w-8 h-8 text-indigo-600 mb-4"></i>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">SENTINEL – Smart Edge Network</h3>
+                                    <p class="text-sm text-gray-600">Developed an edge-based IoT surveillance system using optimized AI models for real-time threat detection.</p>
+                                </div>
+                                <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
+                            </div>
+                            <div class="project-card-back bg-gray-50 p-6 rounded-xl">
+                                <div>
+                                    <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="skill-badge">Python</span>
+                                        <span class="skill-badge">YOLOv8</span>
+                                        <span class="skill-badge">IoT/Edge</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
+                                    <p class="text-xs text-gray-600"><strong>Role:</strong> Full-stack developer. <strong>Outcome:</strong> Achieved 95%+ detection accuracy with low latency deployment on embedded systems.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Project Card: AI License Plate Detection -->
-                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
-                        <span class="text-sm font-semibold text-accent mb-2 block">Deep Learning</span>
-                        <h3 class="text-xl font-bold text-gray-100 mb-3">AI License Plate Detection & OCR</h3>
-                        <p class="text-gray-400 text-sm">
-                            Trained YOLO models for Indian license plates with full-sequence OCR using **CTC loss**, creating a real-time detection system with robust logging and filtering capabilities.
-                        </p>
+                    <!-- Project Card 2: SIH ERP Software -->
+                    <div class="project-card scroll-reveal">
+                         <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
+                            <div class="project-card-front bg-white p-6 rounded-xl">
+                                <div>
+                                    <i data-lucide="building-2" class="w-8 h-8 text-indigo-600 mb-4"></i>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2">SIH ERP Software</h3>
+                                    <p class="text-sm text-gray-600">Built a comprehensive ERP solution for institutional management, covering HR, inventory, and finance modules.</p>
+                                </div>
+                                <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
+                            </div>
+                            <div class="project-card-back bg-gray-50 p-6 rounded-xl">
+                                <div>
+                                    <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="skill-badge">Flask/Django</span>
+                                        <span class="skill-badge">SQL</span>
+                                        <span class="skill-badge">Systems Design</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
+                                    <p class="text-xs text-gray-600"><strong>Role:</strong> Lead Developer. Delivered a working prototype addressing the Hackathon problem statement.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Project Card: SIH ERP Software -->
-                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
-                        <span class="text-sm font-semibold text-accent mb-2 block">Software Engineering & ERP</span>
-                        <h3 class="text-xl font-bold text-gray-100 mb-3">Smart India Hackathon – ERP Software</h3>
-                        <p class="text-gray-400 text-sm">
-                            Developed a comprehensive ERP system for managing institutional workflows (attendance, records, faculty management), prioritizing **robust design and scalability**.
-                        </p>
-                    </div>
+                    <!-- Project Card 3: AI License Plate Detection & OCR -->
+                    <div class="project-card scroll-reveal">
+                        <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
+                           <div class="project-card-front bg-white p-6 rounded-xl">
+                               <div>
+                                   <i data-lucide="scan" class="w-8 h-8 text-indigo-600 mb-4"></i>
+                                   <h3 class="text-xl font-bold text-gray-900 mb-2">AI License Plate Detection</h3>
+                                   <p class="text-sm text-gray-600">A two-stage system combining object detection and OCR for accurate text extraction from license plates.</p>
+                               </div>
+                               <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
+                           </div>
+                           <div class="project-card-back bg-gray-50 p-6 rounded-xl">
+                               <div>
+                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
+                                   <div class="flex flex-wrap gap-2 mb-4">
+                                       <span class="skill-badge">YOLOv8</span>
+                                       <span class="skill-badge">EasyOCR</span>
+                                       <span class="skill-badge">OpenCV</span>
+                                   </div>
+                               </div>
+                               <div>
+                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
+                                   <p class="text-xs text-gray-600"><strong>Role:</strong> ML Developer. Optimized the pipeline for real-time processing and improved recognition.</p>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
 
-                    <!-- Project Card: Student Record Management -->
-                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
-                        <span class="text-sm font-semibold text-accent mb-2 block">Java Development</span>
-                        <h3 class="text-xl font-bold text-gray-100 mb-3">Student Record Management System</h3>
-                        <p class="text-gray-400 text-sm">
-                            A **Java-based system** utilizing file handling to efficiently manage student data, including attendance, grades, and records, built for simplicity and usability.
-                        </p>
-                    </div>
+                    <!-- Project Card 4: Student Record Management System -->
+                    <div class="project-card scroll-reveal">
+                        <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
+                           <div class="project-card-front bg-white p-6 rounded-xl">
+                               <div>
+                                   <i data-lucide="users-round" class="w-8 h-8 text-indigo-600 mb-4"></i>
+                                   <h3 class="text-xl font-bold text-gray-900 mb-2">Student Record System</h3>
+                                   <p class="text-sm text-gray-600">A robust desktop application developed in Java for efficient student data management and persistent storage.</p>
+                               </div>
+                               <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
+                           </div>
+                           <div class="project-card-back bg-gray-50 p-6 rounded-xl">
+                               <div>
+                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
+                                   <div class="flex flex-wrap gap-2 mb-4">
+                                       <span class="skill-badge">Java</span>
+                                       <span class="skill-badge">File Handling</span>
+                                       <span class="skill-badge">OOP</span>
+                                   </div>
+                               </div>
+                               <div>
+                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
+                                   <p class="text-xs text-gray-600"><strong>Role:</strong> Software Developer. Implemented secure and efficient CRUD operations for large datasets.</p>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
 
-                    <!-- Project Card: Doctor’s Dashboard Website -->
-                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
-                        <span class="text-sm font-semibold text-accent mb-2 block">Web Development & UI/UX</span>
-                        <h3 class="text-xl font-bold text-gray-100 mb-3">Doctor’s Dashboard Website</h3>
-                        <p class="text-gray-400 text-sm">
-                            Built a modern, responsive web dashboard for healthcare professionals with advanced **CSS animations**, interactive charts, and a user-friendly UI.
-                        </p>
-                    </div>
-
-                    <!-- Project Card: Research Papers -->
-                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
-                        <span class="text-sm font-semibold text-accent mb-2 block">Academic Publishing</span>
-                        <h3 class="text-xl font-bold text-gray-100 mb-3">Research Papers & Publications</h3>
-                        <p class="text-gray-400 text-sm">
-                            Authored papers on **AI and IoT applications**, including intelligent surveillance and trajectory analysis, bridging theoretical research with practical implementation.
-                        </p>
-                    </div>
+                    <!-- Project Card 5: Doctor's Dashboard Website -->
+                    <div class="project-card scroll-reveal">
+                        <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
+                           <div class="project-card-front bg-white p-6 rounded-xl">
+                               <div>
+                                   <i data-lucide="stethoscope" class="w-8 h-8 text-indigo-600 mb-4"></i>
+                                   <h3 class="text-xl font-bold text-gray-900 mb-2">Doctor's Dashboard UI</h3>
+                                   <p class="text-sm text-gray-600">Designed a responsive, modern UI for a medical dashboard, prioritizing data visualization and scheduling.</p>
+                               </div>
+                               <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
+                           </div>
+                           <div class="project-card-back bg-gray-50 p-6 rounded-xl">
+                               <div>
+                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
+                                   <div class="flex flex-wrap gap-2 mb-4">
+                                       <span class="skill-badge">HTML/CSS</span>
+                                       <span class="skill-badge">JavaScript</span>
+                                       <span class="skill-badge">Responsive UI</span>
+                                   </div>
+                               </div>
+                               <div>
+                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
+                                   <p class="text-xs text-gray-600"><strong>Role:</strong> Frontend Developer. Created a modern, accessible interface using contemporary design principles.</p>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
 
                 </div>
             </section>
 
-            <!-- Call to Action / Footer -->
-            <footer class="pt-8 border-t border-gray-700 text-center">
-                <h2 class="text-2xl font-bold text-gray-100 mb-4">
-                    Let's Build the Future Together
-                </h2>
-                <p class="text-gray-400 text-lg mb-6 max-w-3xl mx-auto">
-                    I am seeking opportunities to collaborate on projects that utilize **AI, IoT, and robust software systems** to create measurable, real-world impact.
-                </p>
+            <!-- 4. Research & Publications Section -->
+            <section id="research" class="mb-24 scroll-reveal-left">
+                <h2 class="text-4xl font-extrabold text-indigo-600 mb-10 section-title">Research & Publications</h2>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 divide-y divide-gray-100 card-hover-lift">
+                    
+                    <!-- Paper 1 -->
+                    <div class="py-4">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-1">Intelligent Surveillance Using YOLOv8 and OCR for Real-time Monitoring</h3>
+                        <p class="text-sm text-gray-600 mb-2">
+                            <i data-lucide="calendar" class="w-4 h-4 inline mr-1 text-indigo-500"></i> Year: 2024 | 
+                            <i data-lucide="book-open" class="w-4 h-4 inline mr-1 text-indigo-500"></i> Domain: AI, Computer Vision, IoT
+                        </p>
+                        <a href="#" class="link-underline text-indigo-600 hover:text-indigo-800 text-sm font-medium transition duration-150">
+                            View Paper Link (Placeholder) 
+                            <i data-lucide="external-link" class="w-4 h-4 inline ml-1"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Paper 2 -->
+                    <div class="py-4">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-1">Optimizing Edge Computing for Smart Campus Security Systems</h3>
+                        <p class="text-sm text-gray-600 mb-2">
+                            <i data-lucide="calendar" class="w-4 h-4 inline mr-1 text-indigo-500"></i> Year: 2023 | 
+                            <i data-lucide="book-open" class="w-4 h-4 inline mr-1 text-indigo-500"></i> Domain: IoT, Embedded Systems, Network Architecture
+                        </p>
+                        <a href="#" class="link-underline text-indigo-600 hover:text-indigo-800 text-sm font-medium transition duration-150">
+                            View Conference Page (Placeholder) 
+                            <i data-lucide="external-link" class="w-4 h-4 inline ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
 
-                <!-- NEW CONTACT INFO SECTION -->
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8 text-lg font-medium text-gray-300">
-                    <!-- Phone -->
-                    <a href="tel:+919363725862" class="flex items-center justify-center hover:text-accent transition-colors" title="Call Bharani">
-                        <!-- Phone Icon -->
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.5l1.5 4-2 3a10 10 0 0010 10l3-2 4 1.5V19a2 2 0 01-2 2h-1c-7.732 0-14-6.268-14-14V5z"></path></svg>
-                        +91 93637 25862
-                    </a>
-                    <!-- Email -->
-                    <a href="mailto:bharanisri73@gmail.com" class="flex items-center justify-center hover:text-accent transition-colors" title="Email Bharani">
-                        <!-- Email Icon -->
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        bharanisri73@gmail.com
-                    </a>
+            <!-- 5. Skills Section -->
+            <section id="skills" class="mb-24">
+                <h2 class="text-4xl font-extrabold text-indigo-600 mb-10 text-center section-title scroll-reveal">Interactive Skills Globe</h2>
+                
+                <div id="skill-globe-container" class="w-full h-96 md:h-[500px] flex items-center justify-center scroll-reveal">
+                    <canvas width="800" height="600" id="skill-canvas">
+                        <p>Your browser does not support the canvas element.</p>
+                    </canvas>
                 </div>
 
-                <!-- Contact Button -->
-                <a href="mailto:bharanisri73@gmail.com" class="inline-block px-10 py-3 bg-accent hover:bg-indigo-600 text-white font-bold rounded-full shadow-xl transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
-                    Email Me
-                </a>
-            </footer>
+                <div id="skill-tags" class="hidden">
+                    <ul>
+                        <li><a href="#" data-weight="25">Python</a></li>
+                        <li><a href="#" data-weight="23">Java</a></li>
+                        <li><a href="#" data-weight="20">JavaScript</a></li>
+                        <li><a href="#" data-weight="28">YOLOv8</a></li>
+                        <li><a href="#" data-weight="26">EasyOCR</a></li>
+                        <li><a href="#" data-weight="24">TensorFlow</a></li>
+                        <li><a href="#" data-weight="22">OpenCV</a></li>
+                        <li><a href="#" data-weight="25">Flask/Django</a></li>
+                        <li><a href="#" data-weight="21">HTML/CSS</a></li>
+                        <li><a href="#" data-weight="23">SQL</a></li>
+                        <li><a href="#" data-weight="27">IoT</a></li>
+                        <li><a href="#" data-weight="26">Arduino/ESP32</a></li>
+                        <li><a href="#" data-weight="20">Git</a></li>
+                        <li><a href="#" data-weight="19">Linux</a></li>
+                        <li><a href="#" data-weight="24">Systems Design</a></li>
+                        <li><a href="#" data-weight="22">OOP</a></li>
+                        <li><a href="#" data-weight="21">C</a></li>
+                        <li><a href="#" data-weight="23">Edge Computing</a></li>
+                    </ul>
+                </div>
+            </section>
 
-        </div>
+        </div> <!-- End of main content container -->
+
     </main>
+    
+    <!-- 6. Contact Section (Footer) -->
+    <footer id="contact" class="bg-gray-900 text-white py-16 scroll-reveal-right relative overflow-hidden">
+        <!-- Animated Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-indigo-500 rounded-full filter blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h2 class="text-4xl font-extrabold text-indigo-400 mb-4 text-center">Let's Connect</h2>
+            <p class="text-xl text-gray-400 mb-12 text-center">
+                Open to collaborations in AI, IoT, and software systems. Let's build something impactful.
+            </p>
 
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Social Links -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Find Me Online</h3>
+                    <div class="space-y-3">
+                        <a href="mailto:bharanisri73@gmail.com" class="flex items-center text-gray-300 hover:text-indigo-400 transition-all duration-300 group card-hover-lift p-3 rounded-lg bg-gray-800/50 backdrop-blur-sm">
+                            <i data-lucide="mail" class="w-6 h-6 mr-3 text-indigo-500 group-hover:text-indigo-400 transition-transform group-hover:scale-110"></i>
+                            <span class="text-lg">bharanisri73@gmail.com</span>
+                        </a>
+                        <a href="https://github.com/bharani-01" target="_blank" class="flex items-center text-gray-300 hover:text-indigo-400 transition-all duration-300 group card-hover-lift p-3 rounded-lg bg-gray-800/50 backdrop-blur-sm">
+                            <i data-lucide="github" class="w-6 h-6 mr-3 text-indigo-500 group-hover:text-indigo-400 transition-transform group-hover:scale-110"></i>
+                            <span class="text-lg">GitHub/bharani-01</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/bharani-k-r-45a950354/" target="_blank" class="flex items-center text-gray-300 hover:text-indigo-400 transition-all duration-300 group card-hover-lift p-3 rounded-lg bg-gray-800/50 backdrop-blur-sm">
+                            <i data-lucide="linkedin" class="w-6 h-6 mr-3 text-indigo-500 group-hover:text-indigo-400 transition-transform group-hover:scale-110"></i>
+                            <span class="text-lg">LinkedIn/bharani-k-r-45a950354</span>
+                        </a>
+                        <a href="tel:+919363725862" class="flex items-center text-gray-300 hover:text-indigo-400 transition-all duration-300 group card-hover-lift p-3 rounded-lg bg-gray-800/50 backdrop-blur-sm">
+                            <i data-lucide="phone" class="w-6 h-6 mr-3 text-indigo-500 group-hover:text-indigo-400 transition-transform group-hover:scale-110"></i>
+                            <span class="text-lg">+91 9363725862</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-2xl card-hover-lift backdrop-blur-sm bg-opacity-80">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Send a Message</h3>
+                    <form id="contact-form" class="space-y-4">
+                        <!-- TODO: Replace with your Web3Forms Access Key -->
+                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                        
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-4 py-2 text-lg font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 shadow-md transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                    <div id="form-message" class="mt-4 text-center hidden p-3 rounded-lg text-sm transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center text-gray-500 text-sm border-t border-gray-800 pt-8">
+                &copy; 2024 Bharani. Built with passion and code.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load TagCanvas for skills globe -->
+    <script src="//www.goat1000.com/tagcanvas.min.js" type="text/javascript"></script>
+
+    <!-- JavaScript for Enhanced Interactivity and Professional Animations -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // === PARTICLE EFFECT GENERATOR ===
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles-container');
+            if (!particlesContainer) return;
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize particles
+        createParticles();
+
+        // === MOBILE MENU LOGIC ===
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('svg');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.setAttribute('data-lucide', 'menu');
+            } else {
+                icon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.querySelector('svg').setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // === CONTACT FORM HANDLING ===
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Animate button on submit and disable it
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            submitButton.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 inline animate-spin"></i> Sending...';
+            submitButton.disabled = true;
+            lucide.createIcons();
+            
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+            formMessage.classList.add('hidden');
+
+            fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                })
+                .then(async (response) => {
+                    let jsonResponse = await response.json();
+                    if (response.status == 200) {
+                        formMessage.textContent = jsonResponse.message || 'Thank you! Your message has been sent.';
+                        formMessage.classList.remove('hidden', 'text-red-400', 'bg-red-900/50');
+                        formMessage.classList.add('bg-green-900/50', 'text-green-300');
+                        contactForm.reset();
+                    } else {
+                        formMessage.textContent = jsonResponse.message || 'Something went wrong. Please try again.';
+                        formMessage.classList.remove('hidden', 'text-green-300', 'bg-green-900/50');
+                        formMessage.classList.add('bg-red-900/50', 'text-red-400');
+                    }
+                })
+                .catch(error => {
+                    formMessage.textContent = 'An error occurred. Please check your connection and try again.';
+                    formMessage.classList.remove('hidden', 'text-green-300', 'bg-green-900/50');
+                    formMessage.classList.add('bg-red-900/50', 'text-red-400');
+                })
+                .finally(() => {
+                    submitButton.innerHTML = 'Send Message';
+                    submitButton.disabled = false;
+                     setTimeout(() => {
+                        formMessage.classList.add('hidden');
+                    }, 6000);
+                });
+        });
+
+        // === STICKY HEADER EFFECT ===
+        const header = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            // Add shadow on scroll
+            if (currentScroll > 50) {
+                header.classList.add('shadow-xl');
+            } else {
+                header.classList.remove('shadow-xl');
+                header.classList.add('shadow-md');
+            }
+            
+            // Hide/show header on scroll
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // === ENHANCED INTERSECTION OBSERVER FOR SCROLL ANIMATIONS ===
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        // Main scroll reveal observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    
+                    // Stagger animations for cards
+                    if (target.classList.contains('project-card') || target.classList.contains('skill-card')) {
+                        const index = Array.from(target.parentNode.children).indexOf(target);
+                        target.style.animationDelay = `${index * 0.15}s`;
+                    } else {
+                        target.style.animationDelay = '0s';
+                    }
+                    
+                    target.classList.add('animate-in');
+                    
+                    // Animate section titles
+                    if (target.classList.contains('section-title')) {
+                        setTimeout(() => {
+                            target.classList.add('animate-in');
+                        }, 200);
+                    }
+                    
+                    observer.unobserve(target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-reveal elements
+        document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Observe section titles
+        document.querySelectorAll('.section-title').forEach(el => {
+            observer.observe(el);
+        });
+
+        // === TYPEWRITER EFFECT COMPLETION ===
+        // After typewriter animation completes, remove the border
+        const typewriterElement = document.querySelector('.typewriter-text');
+        if (typewriterElement) {
+            setTimeout(() => {
+                typewriterElement.style.borderRight = 'none';
+            }, 3500); // After typewriter + blink animations
+        }
+
+        // === ACTIVE NAV LINK HIGHLIGHT ===
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-indigo-600', 'font-bold');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-indigo-600', 'font-bold');
+                }
+            });
+        });
+
+        // === SMOOTH SCROLL WITH OFFSET FOR FIXED HEADER ===
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // === DYNAMIC CURSOR EFFECT (Optional, for desktop) ===
+        if (window.innerWidth > 768) {
+            const cursor = document.createElement('div');
+            cursor.style.cssText = `
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                border: 2px solid rgba(99, 102, 241, 0.5);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.15s ease, border-color 0.15s ease;
+                display: none;
+                mix-blend-mode: difference;
+            `;
+            document.body.appendChild(cursor);
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.display = 'block';
+                cursor.style.left = e.clientX - 10 + 'px';
+                cursor.style.top = e.clientY - 10 + 'px';
+            });
+
+            // Scale cursor on interactive elements
+            document.querySelectorAll('a, button, .card-hover-lift').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursor.style.borderColor = 'rgba(255, 255, 255, 0.8)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.borderColor = 'rgba(99, 102, 241, 0.5)';
+                });
+            });
+        }
+
+        // === LOADING ANIMATION ===
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // === SKILLS GLOBE INITIALIZATION ===
+        window.addEventListener('load', () => {
+             try {
+                TagCanvas.Start('skill-canvas', 'skill-tags', {
+                    textColour: '#4338ca',
+                    outlineColour: '#c7d2fe',
+                    reverse: true,
+                    depth: 0.9,
+                    maxSpeed: 0.04,
+                    initial: [0.1,-0.1],
+                    weight: true,
+                    weightMode: 'size',
+                    weightSize: 1.2,
+                    dragControl: true,
+                    noSelect: true,
+                    textFont: 'Inter, sans-serif',
+                    textHeight: 20,
+                    shadow: '#c7d2fe',
+                    shadowBlur: 5
+                });
+            } catch(e) {
+                // In case of error, hide the canvas container
+                document.getElementById('skill-globe-container').style.display = 'none';
+            }
+        });
+
+
+    </script>
 </body>
 </html>
+
