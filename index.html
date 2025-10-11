@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharani | Cyber & IoT Engineer</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the Inter font, dark theme, and smooth scrolling */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark gray (Tailwind gray-900) */
+            line-height: 1.7;
+            color: #d1d5db; /* Light gray text */
+        }
+        .text-accent {
+            color: #6366f1; /* Tailwind 'indigo-500' for a sleek, tech accent */
+        }
+        .card-bg {
+            background-color: #1f2937; /* Dark card background (Tailwind gray-800) */
+        }
+        .separator {
+            height: 3px;
+            width: 80px;
+            background-color: #6366f1;
+            margin: 1rem 0 2rem 0;
+            border-radius: 9999px;
+        }
+        .main-container {
+            max-width: 1200px;
+        }
+        /* Project card hover effect */
+        .project-card-hover {
+            transition: all 0.3s ease;
+        }
+        .project-card-hover:hover {
+            transform: translateY(-5px);
+            /* Custom shadow with accent color */
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3), 0 4px 6px -2px rgba(99, 102, 241, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Main Content Container (Simulates the Dashboard Panel) -->
+    <main class="min-h-screen flex justify-center p-4 sm:p-8">
+        <div class="main-container w-full card-bg shadow-2xl rounded-3xl p-6 sm:p-12 mt-8 mb-8">
+
+            <!-- Header & Identity Section -->
+            <header class="mb-12 border-b border-gray-700 pb-8">
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-100 leading-tight">
+                    Hello, I'm <span class="text-accent">Bharani</span>
+                </h1>
+                <p class="text-2xl sm:text-3xl font-light text-gray-400 mt-3">
+                    <span class="text-accent">2nd-Year Cyber & IoT Engineering Student</span>
+                </p>
+                <div class="separator"></div>
+
+                <!-- Core Bio -->
+                <p class="text-gray-300 text-lg sm:text-xl max-w-4xl">
+                    I'm passionate about building **intelligent, practical systems** that solve real-world problems. 
+                    I specialize in **IoT, AI, web development, and software engineering**, and I enjoy taking projects from concept to deployment.
+                </p>
+            </header>
+
+            <!-- Key Skills Dashboard Widget -->
+            <section class="mb-12 p-6 rounded-2xl bg-gray-900 border border-gray-700 shadow-xl">
+                <h2 class="text-2xl font-bold text-gray-100 mb-6 flex items-center">
+                    <!-- Icon for Skills (Lightning Bolt) -->
+                    <svg class="w-6 h-6 mr-3 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Core Technical Skills
+                </h2>
+                <!-- Skill Chips -->
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">IoT & Embedded Systems</span>
+                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">AI / Machine Learning (YOLOv8)</span>
+                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">Python & Data Processing</span>
+                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">Java & Backend Development</span>
+                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">Web Development (HTML/CSS/Tailwind)</span>
+                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">OCR (EasyOCR, CTC Loss)</span>
+                    <span class="px-4 py-1.5 bg-indigo-700 text-white text-sm font-medium rounded-full shadow-md transition-colors hover:bg-indigo-600">System Design & ERP</span>
+                </div>
+            </section>
+            
+            <!-- Projects & Research Highlights Section -->
+            <section class="mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-100 mb-8 flex items-center">
+                    <!-- Icon for Projects (Gears) -->
+                    <svg class="w-8 h-8 mr-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.38-.458.919-.661 1.344-.457l.08.03c.535.253.791.802.663 1.365l-.46 2.115a.965.965 0 01-1.378.718l-1.41-1.41a.965.965 0 00-1.378 0l-1.41 1.41a.965.965 0 01-1.378-.718l-.46-2.115c-.128-.563.128-1.112.663-1.365l.08-.03c.425-.204.964-.001 1.344.457l.458.55a.965.965 0 001.378 0l.458-.55zM12 17a5 5 0 100-10 5 5 0 000 10zM12 2a10 10 0 100 20 10 10 0 000-20z"></path></svg>
+                    Projects & Research Highlights
+                </h2>
+
+                <!-- Projects Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Project Card: SENTINEL -->
+                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
+                        <span class="text-sm font-semibold text-accent mb-2 block">IoT & AI Integration</span>
+                        <h3 class="text-xl font-bold text-gray-100 mb-3">SENTINEL – Smart Campus Surveillance</h3>
+                        <p class="text-gray-400 text-sm">
+                            Designed and implemented a vehicle tracking system using **IoT devices**, **YOLOv8** for license plate detection, and **EasyOCR**. Features real-time dashboards and event logging.
+                        </p>
+                    </div>
+
+                    <!-- Project Card: AI License Plate Detection -->
+                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
+                        <span class="text-sm font-semibold text-accent mb-2 block">Deep Learning</span>
+                        <h3 class="text-xl font-bold text-gray-100 mb-3">AI License Plate Detection & OCR</h3>
+                        <p class="text-gray-400 text-sm">
+                            Trained YOLO models for Indian license plates with full-sequence OCR using **CTC loss**, creating a real-time detection system with robust logging and filtering capabilities.
+                        </p>
+                    </div>
+
+                    <!-- Project Card: SIH ERP Software -->
+                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
+                        <span class="text-sm font-semibold text-accent mb-2 block">Software Engineering & ERP</span>
+                        <h3 class="text-xl font-bold text-gray-100 mb-3">Smart India Hackathon – ERP Software</h3>
+                        <p class="text-gray-400 text-sm">
+                            Developed a comprehensive ERP system for managing institutional workflows (attendance, records, faculty management), prioritizing **robust design and scalability**.
+                        </p>
+                    </div>
+
+                    <!-- Project Card: Student Record Management -->
+                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
+                        <span class="text-sm font-semibold text-accent mb-2 block">Java Development</span>
+                        <h3 class="text-xl font-bold text-gray-100 mb-3">Student Record Management System</h3>
+                        <p class="text-gray-400 text-sm">
+                            A **Java-based system** utilizing file handling to efficiently manage student data, including attendance, grades, and records, built for simplicity and usability.
+                        </p>
+                    </div>
+
+                    <!-- Project Card: Doctor’s Dashboard Website -->
+                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
+                        <span class="text-sm font-semibold text-accent mb-2 block">Web Development & UI/UX</span>
+                        <h3 class="text-xl font-bold text-gray-100 mb-3">Doctor’s Dashboard Website</h3>
+                        <p class="text-gray-400 text-sm">
+                            Built a modern, responsive web dashboard for healthcare professionals with advanced **CSS animations**, interactive charts, and a user-friendly UI.
+                        </p>
+                    </div>
+
+                    <!-- Project Card: Research Papers -->
+                    <div class="p-6 rounded-xl bg-gray-900 border border-gray-700 project-card-hover">
+                        <span class="text-sm font-semibold text-accent mb-2 block">Academic Publishing</span>
+                        <h3 class="text-xl font-bold text-gray-100 mb-3">Research Papers & Publications</h3>
+                        <p class="text-gray-400 text-sm">
+                            Authored papers on **AI and IoT applications**, including intelligent surveillance and trajectory analysis, bridging theoretical research with practical implementation.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Call to Action / Footer -->
+            <footer class="pt-8 border-t border-gray-700 text-center">
+                <h2 class="text-2xl font-bold text-gray-100 mb-4">
+                    Let's Build the Future Together
+                </h2>
+                <p class="text-gray-400 text-lg mb-6 max-w-3xl mx-auto">
+                    I am seeking opportunities to collaborate on projects that utilize **AI, IoT, and robust software systems** to create measurable, real-world impact.
+                </p>
+
+                <!-- NEW CONTACT INFO SECTION -->
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8 text-lg font-medium text-gray-300">
+                    <!-- Phone -->
+                    <a href="tel:+919363725862" class="flex items-center justify-center hover:text-accent transition-colors" title="Call Bharani">
+                        <!-- Phone Icon -->
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.5l1.5 4-2 3a10 10 0 0010 10l3-2 4 1.5V19a2 2 0 01-2 2h-1c-7.732 0-14-6.268-14-14V5z"></path></svg>
+                        +91 93637 25862
+                    </a>
+                    <!-- Email -->
+                    <a href="mailto:bharanisri73@gmail.com" class="flex items-center justify-center hover:text-accent transition-colors" title="Email Bharani">
+                        <!-- Email Icon -->
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        bharanisri73@gmail.com
+                    </a>
+                </div>
+
+                <!-- Contact Button -->
+                <a href="mailto:bharanisri73@gmail.com" class="inline-block px-10 py-3 bg-accent hover:bg-indigo-600 text-white font-bold rounded-full shadow-xl transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
+                    Email Me
+                </a>
+            </footer>
+
+        </div>
+    </main>
+
+</body>
+</html>
