@@ -1,1031 +1,1248 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bharani | Cyber & IoT Engineer</title>
     <!-- Load Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Lucide icons for visual elements -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
-        /* Define Inter font and set fallback */
-        :root {
+        /* Custom font and base styling */
+        body {
             font-family: 'Inter', sans-serif;
-        }
-        /* Custom scroll behavior for smooth navigation */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Style for the fixed header */
-        .header-bg {
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            background-color: rgba(255, 255, 255, 0.8);
-            transition: transform 0.3s ease;
-        }
-        /* Custom styling for a focus ring color */
-        .focus-ring-indigo:focus {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.4);
+            background-color: #0f172a;
+            /* bg-slate-900 */
+            color: #cbd5e1;
+            /* text-slate-300 */
         }
 
-        /* === ADVANCED ANIMATION KEYFRAMES === */
+        /* Use Inter for all headings */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Clean heading style */
+        .section-heading {
+            font-size: 3rem;
+            /* 48px, text-5xl */
+            font-weight: 800;
+            /* font-extrabold */
+            color: #818cf8;
+            /* text-indigo-400 */
+            margin-bottom: 2.5rem;
+            /* mb-10 */
+        }
+
+        /* === NEW: Glassmorphism Style === */
+        .glass-card {
+            background-color: rgba(30, 41, 59, 0.6);
+            /* bg-slate-800/60 */
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.7);
+            /* border-slate-700/70 */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* === NEW: Particle Canvas Style === */
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* === NEW: IoT/Circuit Background === */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><defs><pattern id="circuit" patternUnits="userSpaceOnUse" width="40" height="40"><path stroke="%231e293b" stroke-width="1" d="M0 10 h20 v10 h10 v-10 h10 m-30 10 v10 h-10"></path><path stroke="%231e293b" stroke-width="1" d="M40 30 h-10 v-10 h-10 v10 h-10 m30 -10 v-10 h10"></path></pattern></defs><rect width="40" height="40" fill="url(%23circuit)" /></svg>');
+            opacity: 0.5;
+        }
+
+
+        /* === NEW: Animation Styles === */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(99, 102, 241, 0.8);
-            }
-        }
-
-        @keyframes gradient-shift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        @keyframes typewriter {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
-        }
-
-        /* === HERO SECTION ADVANCED ANIMATIONS === */
-        .animated-gradient {
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
-            background-size: 400% 400%;
-            animation: gradient-shift 15s ease infinite;
-        }
-
-        .hero-avatar {
-            animation: float 6s ease-in-out infinite, fadeInScale 1s ease-out;
-        }
-
-        .hero-avatar:hover {
-            animation: float 3s ease-in-out infinite, pulse-glow 2s ease-in-out infinite;
-        }
-
-        .typewriter-text {
-            overflow: hidden;
-            border-right: 3px solid #fff;
-            white-space: nowrap;
-            animation: typewriter 2s steps(40) 1s forwards, blink 0.75s step-end infinite;
-        }
-
-        .hero-reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        /* === SCROLL REVEAL ANIMATIONS === */
-        .scroll-reveal {
+        /* Class to apply for scroll-in animations */
+        .animate-on-scroll {
             opacity: 0;
             visibility: hidden;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
-        .scroll-reveal.animate-in {
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
             visibility: visible;
             animation: fadeInUp 0.7s ease-out forwards;
         }
 
-        .scroll-reveal-left {
+        /* Staggered children animation */
+        .animate-on-scroll.is-visible .stagger-child {
             opacity: 0;
-            visibility: hidden;
+            animation: fadeInUp 0.7s ease-out forwards;
         }
 
-        .scroll-reveal-left.animate-in {
-            visibility: visible;
-            animation: slideInLeft 0.8s ease-out forwards;
-        }
-
-        .scroll-reveal-right {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .scroll-reveal-right.animate-in {
-            visibility: visible;
-            animation: slideInRight 0.8s ease-out forwards;
-        }
-
-        /* === PROFESSIONAL MICRO-INTERACTIONS === */
-        .card-hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card-hover-lift:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        .link-underline {
-            position: relative;
-            display: inline-block;
-        }
-
-        .link-underline::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: #4f46e5;
-            transition: width 0.3s ease;
-        }
-
-        .link-underline:hover::after {
-            width: 100%;
-        }
-
-        /* === SECTION TITLE ANIMATION === */
-        .section-title {
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 4px;
-            bottom: -8px;
-            left: 0;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed);
-            transition: width 0.6s ease;
-        }
-
-        .section-title.animate-in::before {
-            width: 100%;
-        }
-
-        /* === PARTICLE BACKGROUND === */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: particleFloat 20s infinite linear;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(50px);
-                opacity: 0;
-            }
-        }
-
-        /* === SKILL BADGE ANIMATION === */
+        /* Skill Badge Styles */
         .skill-badge {
             display: inline-block;
-            background-color: #e0e7ff;
-            color: #4338ca;
-            font-size: 0.75rem;
+            background: rgba(99, 102, 241, 0.1);
+            /* bg-indigo-500/10 */
+            color: #a5b4fc;
+            /* text-indigo-300 */
+            font-size: 0.8rem;
             font-weight: 600;
-            padding: 0.3rem 0.75rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 9999px;
-            margin-bottom: 0.5rem;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            /* border-indigo-500/20 */
+            transition: all 0.2s ease-in-out;
         }
 
         .skill-badge:hover {
-            transform: scale(1.1) rotate(2deg);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+            background-color: rgba(99, 102, 241, 0.2);
+            /* bg-indigo-500/20 */
+            color: #c7d2fe;
+            /* text-indigo-200 */
         }
 
-        /* === PROJECT CARD FLIP ANIMATION === */
-        .project-grid {
-            perspective: 1000px;
+        .skill-badge-sm {
+            display: inline-block;
+            background-color: #334155;
+            /* bg-slate-700 */
+            color: #cbd5e1;
+            /* text-slate-300 */
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
         }
-        .project-card {
-            min-height: 350px;
-            background-color: transparent;
+
+        /* Animation delay utilities */
+        .delay-100 {
+            animation-delay: 0.1s;
         }
-        .project-card-inner {
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+
+        .delay-600 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-2s {
+            animation-delay: 2s;
+        }
+
+        /* Accessibility: focus-visible outline for all interactive elements */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #818cf8;
+            /* indigo-400 */
+            outline-offset: 3px;
+            border-radius: 0.375rem;
+            /* match rounded-md */
+        }
+
+        /* Respect prefers-reduced-motion: minimize animations */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Project card polish */
+        .glass-card {
             position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: left;
-            transition: transform 0.7s;
-            transform-style: preserve-3d;
+            overflow: hidden;
+            transition: transform 300ms ease, box-shadow 300ms ease;
+            will-change: transform;
         }
-        .project-card:hover .project-card-inner {
-            transform: rotateY(180deg);
+
+        .glass-card img {
+            transition: transform 400ms ease, filter 300ms ease;
         }
-        .project-card-front, .project-card-back {
+
+        .glass-card:hover img {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* Subtle gradient border on hover */
+        .glass-card::before {
+            content: "";
             position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            inset: -1px;
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(168, 85, 247, 0.25));
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 300ms ease;
+            pointer-events: none;
         }
-        .project-card-back {
-            transform: rotateY(180deg);
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Typewriter caret */
+        .typewriter::after {
+            content: '|';
+            margin-left: 4px;
+            color: #cbd5e1;
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
 
-    <!-- ⚡ 1. Navigation Bar -->
-    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 shadow-md header-bg">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-extrabold text-indigo-600 tracking-wider hover:text-indigo-800 transition duration-150">Bharani</a>
-            
-            <!-- Desktop Navigation Links -->
-            <div class="hidden md:flex space-x-6 text-sm font-medium">
-                <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600 transition duration-150">About</a>
-                <a href="#projects" class="nav-link text-gray-700 hover:text-indigo-600 transition duration-150">Projects</a>
-                <a href="#research" class="nav-link text-gray-700 hover:text-indigo-600 transition duration-150">Research</a>
-                <a href="#skills" class="nav-link text-gray-700 hover:text-indigo-600 transition duration-150">Skills</a>
-                <a href="#contact" class="nav-link bg-indigo-600 text-white px-3 py-1 rounded-full hover:bg-indigo-700 transition duration-150 shadow-md">Contact</a>
+<body class="w-full overflow-x-hidden">
+
+    <!-- Header -->
+    <header id="navbar"
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-slate-900/70 backdrop-blur-md shadow-lg shadow-black/20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <!-- Logo/Name -->
+            <a href="#home" class="text-3xl font-bold text-indigo-400 tracking-wide">BHARANI</a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#about"
+                    class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">About</a>
+                <a href="#skillset"
+                    class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Skillset</a>
+                <a href="#projects"
+                    class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Projects</a>
+                <a href="#research"
+                    class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Research</a>
+                <a href="#contact"
+                    class="bg-indigo-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-indigo-600/30">
+                    Contact Me
+                </a>
             </div>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden p-2 text-gray-700 hover:text-indigo-600 transition duration-150 rounded-lg">
-                <i data-lucide="menu" class="w-6 h-6"></i>
+            <button id="mobile-menu-button" class="md:hidden p-2 text-gray-300 hover:text-white"
+                aria-label="Toggle navigation menu" title="Toggle navigation menu">
+                <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+                <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
             </button>
         </nav>
-        
+
         <!-- Mobile Menu Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-white shadow-xl border-t border-gray-100 pb-4">
-            <div class="flex flex-col space-y-2 px-4 pt-2 text-base font-medium">
-                <a href="#about" class="mobile-nav-link p-2 rounded-lg hover:bg-gray-100 transition duration-150">About</a>
-                <a href="#projects" class="mobile-nav-link p-2 rounded-lg hover:bg-gray-100 transition duration-150">Projects</a>
-                <a href="#research" class="mobile-nav-link p-2 rounded-lg hover:bg-gray-100 transition duration-150">Research</a>
-                <a href="#skills" class="mobile-nav-link p-2 rounded-lg hover:bg-gray-100 transition duration-150">Skills</a>
-                <a href="#contact" class="mobile-nav-link p-2 rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition duration-150">Contact</a>
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-20 left-0 w-full bg-slate-800/90 backdrop-blur-lg shadow-lg pb-6">
+            <div class="flex flex-col space-y-4 px-6 pt-4 text-center">
+                <a href="#about"
+                    class="mobile-nav-link text-gray-200 hover:text-white transition-colors duration-200 py-2 text-lg font-medium">About</a>
+                <a href="#skillset"
+                    class="mobile-nav-link text-gray-200 hover:text-white transition-colors duration-200 py-2 text-lg font-medium">Skillset</a>
+                <a href="#projects"
+                    class="mobile-nav-link text-gray-200 hover:text-white transition-colors duration-200 py-2 text-lg font-medium">Projects</a>
+                <a href="#research"
+                    class="mobile-nav-link text-gray-200 hover:text-white transition-colors duration-200 py-2 text-lg font-medium">Research</a>
+                <a href="#contact"
+                    class="mobile-nav-link bg-indigo-600 text-white px-6 py-3 rounded-full font-medium hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-indigo-600/30 mt-4">
+                    Contact Me
+                </a>
             </div>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="pt-20">
-        
-        <!-- 1. Homepage (Hero Section) - ENHANCED WITH ADVANCED ANIMATIONS -->
-        <section id="home" class="h-screen flex items-center justify-center animated-gradient border-b border-gray-100 relative overflow-hidden">
-            <!-- Particle Background -->
-            <div class="particles" id="particles-container"></div>
-            
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20 relative z-10">
-                <div class="mb-8 flex justify-center">
-                    <!-- Professional Photo/Avatar with Float Animation -->
-                    <img src="https://placehold.co/160x160/6366f1/ffffff?text=Bharani" 
-                         alt="Professional Avatar" 
-                         class="w-40 h-40 rounded-full object-cover shadow-2xl ring-4 ring-white hero-avatar"
-                         style="animation-delay: 0.2s;">
-                </div>
-                
-                <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tighter text-white leading-tight mb-4 hero-reveal"
-                    style="animation-delay: 0.4s;">
-                    Hi, I'm <span class="typewriter-text inline-block">Bharani</span>
-                </h1>
-                
-                <p class="text-xl sm:text-2xl font-medium text-white/90 mb-8 hero-reveal"
-                   style="animation-delay: 1.2s;">
-                    Cyber & IoT Engineer | AI, Web & Intelligent Systems Developer
-                </p>
 
-                <p class="max-w-3xl mx-auto text-lg text-white/80 mb-10 hero-reveal backdrop-blur-sm bg-white/10 p-6 rounded-2xl"
-                   style="animation-delay: 1.4s;">
-                    I build intelligent systems combining <strong>AI, IoT, and software engineering</strong>. From developing scalable ERP software to creating AI-driven surveillance solutions, I enjoy solving real-world problems with robust, hands-on, and scalable technologies.
-                </p>
+        <!-- Section 1: Hero -->
+        <section id="home"
+            class="min-h-screen h-auto flex items-center justify-center relative bg-slate-900 pt-20 pb-10 md:pt-0 md:pb-0 overflow-hidden">
+            <!-- NEW: Particle Canvas -->
+            <canvas id="particle-canvas"></canvas>
 
-                <a href="#projects" 
-                   class="inline-flex items-center px-8 py-3 border-2 border-white text-base font-semibold rounded-full shadow-lg text-white bg-white/10 backdrop-blur-sm hover:bg-white hover:text-indigo-600 transition-all duration-300 transform hover:scale-105 focus-ring-indigo hero-reveal"
-                   style="animation-delay: 1.6s;">
-                    See My Work 
-                    <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                </a>
+            <!-- Background Gradients -->
+            <div
+                class="absolute top-0 left-0 w-96 h-96 bg-indigo-600/30 rounded-full filter blur-3xl opacity-50 animate-pulse">
+            </div>
+            <div
+                class="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/30 rounded-full filter blur-3xl opacity-50 animate-pulse delay-2s">
             </div>
 
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 hero-reveal" style="animation-delay: 1.8s;">
-                <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-                    <div class="w-1 h-3 bg-white/70 rounded-full mt-2 animate-bounce"></div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <!-- NEW: Added animation classes to hero elements -->
+                <h3 class="text-3xl md:text-5xl text-gray-400 mb-4 font-semibold animate-on-scroll delay-100">Hello, I'm
+                </h3>
+                <h1
+                    class="text-6xl md:text-8xl lg:text-9xl font-extrabold mb-6 text-indigo-400 animate-on-scroll delay-200">
+                    BHARANI.
+                </h1>
+
+                <h2 class="text-2xl md:text-4xl font-semibold text-gray-100 mb-4 animate-on-scroll delay-300">
+                    Cyber & IoT Engineer
+                </h2>
+                <h2 class="text-2xl md:text-4xl font-semibold text-gray-100 animate-on-scroll delay-400">
+                    <span id="typewriter" class="typewriter">AI & Intelligent Systems Developer</span>
+                </h2>
+
+                <p class="max-w-3xl mx-auto text-lg text-gray-300 my-10 leading-relaxed animate-on-scroll delay-500">
+                    I build intelligent systems combining <strong>AI, IoT, and software engineering</strong>. From
+                    developing scalable ERP software to creating AI-driven surveillance solutions, I enjoy solving
+                    real-world problems with robust, hands-on, and scalable technologies.
+                </p>
+
+                <a href="#skillset"
+                    class="inline-block mt-6 px-8 py-3 bg-indigo-600 text-white font-bold rounded-full text-lg tracking-wider hover:bg-indigo-500 shadow-lg shadow-indigo-500/30 transition-all duration-300 transform hover:scale-105 animate-on-scroll delay-600">
+                    SCROLL FOR MORE
+                </a>
+
+                <!-- Stats Counters -->
+                <div id="stats" class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto text-gray-200">
+                    <div class="glass-card p-6 rounded-lg text-center">
+                        <div class="text-4xl font-extrabold"><span class="counter" data-source="projects">0</span>+
+                        </div>
+                        <div class="mt-1 text-gray-400">Projects</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-lg text-center">
+                        <div class="text-4xl font-extrabold"><span class="counter" data-source="skills">0</span>+</div>
+                        <div class="mt-1 text-gray-400">Skills & Tools</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-lg text-center">
+                        <div class="text-4xl font-extrabold"><span class="counter" data-source="domains">0</span></div>
+                        <div class="mt-1 text-gray-400">Domains</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- General Section Container Styling -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <!-- Section 2: About Me -->
+        <section id="about" class="py-24 bg-slate-900 animate-on-scroll">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <h2 class="section-heading">
+                    About Me
+                </h2>
 
-            <!-- 2. About Me Section -->
-            <section id="about" class="mb-24 scroll-reveal">
-                <h2 class="text-4xl font-extrabold text-indigo-600 mb-6 section-title">About Me</h2>
-                <div class="bg-white p-8 md:p-12 rounded-xl shadow-lg border border-gray-100 card-hover-lift">
-                    <p class="text-lg text-gray-700 mb-6">
-                        As a final-year student specializing in <strong>Cyber & IoT Engineering</strong>, my journey has been driven by a passion for connecting the physical and digital worlds. I don't just study technology; I build with it. My background involves extensive hands-on project work that seamlessly blends <strong>AI/ML</strong> for intelligent decision-making, <strong>IoT</strong> for data acquisition, and <strong>full-stack web development</strong> for seamless system integration.
+                <div class="glass-card p-8 md:p-12 rounded-xl">
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        As a final-year student specializing in <strong>Cyber & IoT Engineering</strong>, my journey has
+                        been driven by a passion for connecting the physical and digital worlds. I don't just study
+                        technology; I build with it. My background involves extensive hands-on project work that
+                        seamlessly blends <strong>AI/ML</strong> for intelligent decision-making, <strong>IoT</strong>
+                        for data acquisition, and <strong>full-stack web development</strong> for seamless system
+                        integration.
                     </p>
-                    <p class="text-lg text-gray-700 mb-6">
-                        My practical experience is validated by major projects like the <strong>SIH ERP software</strong> solution, which demanded high-level systems thinking and collaborative development. This work, combined with my research publications, showcases my ability to transition complex theoretical concepts into credible, deployable solutions.
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        My practical experience is validated by major projects like the <strong>SIH ERP
+                            software</strong> solution, which demanded high-level systems thinking and collaborative
+                        development. This work, combined with my research publications, showcases my ability to
+                        transition complex theoretical concepts into credible, deployable solutions.
                     </p>
-                    
-                    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4">Core Competencies:</h3>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 text-base list-none">
-                        <li class="flex items-start">
-                            <i data-lucide="cpu" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i>
-                            <strong>Intelligent Systems:</strong> AI/ML model development, object detection (YOLOv8), Optical Character Recognition (OCR), and data pipeline management.
+
+                    <h3 class="text-2xl font-bold text-white mt-10 mb-6">Core Competencies:</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300 text-base">
+                        <li class="flex items-start p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                            <svg class="w-5 h-5 text-indigo-400 mr-3 mt-1 flex-shrink-0"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 8V4H8"></path>
+                                <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                                <path d="M12 12v4h4"></path>
+                            </svg>
+                            <strong>Intelligent Systems:</strong> AI/ML model development, object detection (YOLOv8),
+                            OCR, and data pipeline management.
                         </li>
-                        <li class="flex items-start">
-                            <i data-lucide="zap" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i>
-                            <strong>IoT & Embedded:</strong> Practical experience with Arduino, ESP32, and various sensor integrations for real-time monitoring and control.
+                        <li class="flex items-start p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                            <svg class="w-5 h-5 text-indigo-400 mr-3 mt-1 flex-shrink-0"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                            <strong>IoT & Embedded:</strong> Practical experience with Arduino, ESP32, and various
+                            sensor integrations for real-time monitoring.
                         </li>
-                        <li class="flex items-start">
-                            <i data-lucide="code" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i>
-                            <strong>Software Engineering:</strong> Proficient in Python, Java, and developing full-stack web solutions (HTML, CSS, JS, Flask/Django).
+                        <li class="flex items-start p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                            <svg class="w-5 h-5 text-indigo-400 mr-3 mt-1 flex-shrink-0"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                            <strong>Software Engineering:</strong> Proficient in Python, Java, and developing full-stack
+                            web solutions (HTML, CSS, JS, Flask/Django).
                         </li>
-                        <li class="flex items-start">
-                            <i data-lucide="database" class="w-5 h-5 text-indigo-500 mr-3 mt-1 flex-shrink-0"></i>
-                            <strong>Enterprise Systems:</strong> Experience building and customizing ERP solutions, emphasizing scalability and user-centric design.
+                        <li class="flex items-start p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                            <svg class="w-5 h-5 text-indigo-400 mr-3 mt-1 flex-shrink-0"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <strong>Enterprise Systems:</strong> Experience building and customizing ERP solutions,
+                            emphasizing scalability and user-centric design.
                         </li>
                     </ul>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- 3. Projects Section -->
-            <section id="projects" class="mb-24">
-                <h2 class="text-4xl font-extrabold text-indigo-600 mb-10 section-title scroll-reveal">Featured Projects</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 project-grid">
+        <!-- Section 3: Skillset -->
+        <section id="skillset" class="py-24 bg-slate-800/60 animate-on-scroll">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <h2 class="section-heading">
+                    My Skillset
+                </h2>
 
-                    <!-- Project Card 1: SENTINEL -->
-                    <div class="project-card scroll-reveal">
-                        <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
-                            <div class="project-card-front bg-white p-6 rounded-xl">
-                                <div>
-                                    <i data-lucide="shield-check" class="w-8 h-8 text-indigo-600 mb-4"></i>
-                                    <h3 class="text-xl font-bold text-gray-900 mb-2">SENTINEL – Smart Edge Network</h3>
-                                    <p class="text-sm text-gray-600">Developed an edge-based IoT surveillance system using optimized AI models for real-time threat detection.</p>
-                                </div>
-                                <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
-                            </div>
-                            <div class="project-card-back bg-gray-50 p-6 rounded-xl">
-                                <div>
-                                    <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="skill-badge">Python</span>
-                                        <span class="skill-badge">YOLOv8</span>
-                                        <span class="skill-badge">IoT/Edge</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
-                                    <p class="text-xs text-gray-600"><strong>Role:</strong> Full-stack developer. <strong>Outcome:</strong> Achieved 95%+ detection accuracy with low latency deployment on embedded systems.</p>
-                                </div>
+                <!-- UPDATED: Re-organized into 6 cards for a 3x2 grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Skill Category 1: AI & ML -->
+                    <div class="glass-card p-6 rounded-lg h-full stagger-child">
+                        <svg class="w-10 h-10 text-indigo-400 mb-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 8V4H8"></path>
+                            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                            <path d="M12 12v4h4"></path>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white mb-4">AI & Machine Learning</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge">YOLOv8</span>
+                            <span class="skill-badge">EasyOCR</span>
+                            <span class="skill-badge">TensorFlow</span>
+                            <span class="skill-badge">OpenCV</span>
+                            <span class="skill-badge">AI/ML</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Category 2: Programming Languages -->
+                    <div class="glass-card p-6 rounded-lg h-full stagger-child">
+                        <svg class="w-10 h-10 text-indigo-400 mb-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white mb-4">Languages</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">Java</span>
+                            <span class="skill-badge">JavaScript</span>
+                            <span class="skill-badge">C</span>
+                            <span class="skill-badge">OOP</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Category 3: Web & Backend -->
+                    <div class="glass-card p-6 rounded-lg h-full stagger-child">
+                        <svg class="w-10 h-10 text-indigo-400 mb-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white mb-4">Web & Backend</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge">Flask/Django</span>
+                            <span class="skill-badge">HTML/CSS</span>
+                            <span class="skill-badge">JavaScript</span>
+                            <span class="skill-badge">Systems Design</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Category 4: IoT & Embedded -->
+                    <div class="glass-card p-6 rounded-lg h-full stagger-child">
+                        <svg class="w-10 h-10 text-indigo-400 mb-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white mb-4">IoT & Embedded</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge">IoT</span>
+                            <span class="skill-badge">Arduino/ESP32</span>
+                            <span class="skill-badge">Edge Computing</span>
+                        </div>
+                    </div>
+
+                    <!-- NEW: Skill Category 5: Databases -->
+                    <div class="glass-card p-6 rounded-lg h-full stagger-child">
+                        <svg class="w-10 h-10 text-indigo-400 mb-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
+                            </path>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white mb-4">Databases</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge">SQL</span>
+                            <span class="skill-badge">MongoDB</span>
+                        </div>
+                    </div>
+
+                    <!-- UPDATED: Skill Category 6: Software & Tools -->
+                    <div class="glass-card p-6 rounded-lg h-full stagger-child">
+                        <svg class="w-10 h-10 text-indigo-400 mb-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.7-3.7a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0L14.7 6.3z">
+                            </path>
+                            <path
+                                d="M9.3 17.7a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0L2.6 18.4a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0L9.3 17.7z">
+                            </path>
+                            <path d="M14 7l-4 4"></path>
+                            <path d="M9 17l4-4"></path>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-white mb-4">Tools & DevOps</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge">Git</span>
+                            <span class="skill-badge">Linux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Projects -->
+        <section id="projects" class="py-24 bg-slate-900 animate-on-scroll">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <h2 class="section-heading">
+                    Projects
+                </h2>
+
+                <!-- Filter Toolbar -->
+                <div class="mb-8 flex flex-wrap gap-3">
+                    <button
+                        class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-gray-300 hover:text-white hover:bg-slate-700/60 bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-600/30"
+                        data-filter="all">All</button>
+                    <button
+                        class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-gray-300 hover:text-white hover:bg-slate-700/60"
+                        data-filter="ai">AI/ML</button>
+                    <button
+                        class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-gray-300 hover:text-white hover:bg-slate-700/60"
+                        data-filter="iot">IoT</button>
+                    <button
+                        class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-gray-300 hover:text-white hover:bg-slate-700/60"
+                        data-filter="web">Web</button>
+                    <button
+                        class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-gray-300 hover:text-white hover:bg-slate-700/60"
+                        data-filter="desktop">Desktop</button>
+                </div>
+
+                <!-- UPDATED: Added new projects, now a 3x3 grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Project 2 -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="web">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80"
+                            alt="SIH ERP Software" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">SIH ERP Software</h3>
+                            <p class="text-gray-400 text-sm mb-4">Comprehensive ERP solution for institutional
+                                management (HR, inventory, finance).</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">Flask/Django</span>
+                                <span class="skill-badge-sm">SQL</span>
+                                <span class="skill-badge-sm">Systems Design</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project Card 2: SIH ERP Software -->
-                    <div class="project-card scroll-reveal">
-                         <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
-                            <div class="project-card-front bg-white p-6 rounded-xl">
-                                <div>
-                                    <i data-lucide="building-2" class="w-8 h-8 text-indigo-600 mb-4"></i>
-                                    <h3 class="text-xl font-bold text-gray-900 mb-2">SIH ERP Software</h3>
-                                    <p class="text-sm text-gray-600">Built a comprehensive ERP solution for institutional management, covering HR, inventory, and finance modules.</p>
-                                </div>
-                                <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
-                            </div>
-                            <div class="project-card-back bg-gray-50 p-6 rounded-xl">
-                                <div>
-                                    <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="skill-badge">Flask/Django</span>
-                                        <span class="skill-badge">SQL</span>
-                                        <span class="skill-badge">Systems Design</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
-                                    <p class="text-xs text-gray-600"><strong>Role:</strong> Lead Developer. Delivered a working prototype addressing the Hackathon problem statement.</p>
-                                </div>
+                    <!-- Project 3 -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="ai">
+                        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop&q=80"
+                            alt="AI License Plate Detection" class="w-full h-48 object-cover" loading="lazy"
+                            decoding="async" width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">AI License Plate Detection</h3>
+                            <p class="text-gray-400 text-sm mb-4">Two-stage system (object detection + OCR) for accurate
+                                license plate text extraction.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">YOLOv8</span>
+                                <span class="skill-badge-sm">EasyOCR</span>
+                                <span class="skill-badge-sm">OpenCV</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project Card 3: AI License Plate Detection & OCR -->
-                    <div class="project-card scroll-reveal">
-                        <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
-                           <div class="project-card-front bg-white p-6 rounded-xl">
-                               <div>
-                                   <i data-lucide="scan" class="w-8 h-8 text-indigo-600 mb-4"></i>
-                                   <h3 class="text-xl font-bold text-gray-900 mb-2">AI License Plate Detection</h3>
-                                   <p class="text-sm text-gray-600">A two-stage system combining object detection and OCR for accurate text extraction from license plates.</p>
-                               </div>
-                               <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
-                           </div>
-                           <div class="project-card-back bg-gray-50 p-6 rounded-xl">
-                               <div>
-                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
-                                   <div class="flex flex-wrap gap-2 mb-4">
-                                       <span class="skill-badge">YOLOv8</span>
-                                       <span class="skill-badge">EasyOCR</span>
-                                       <span class="skill-badge">OpenCV</span>
-                                   </div>
-                               </div>
-                               <div>
-                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
-                                   <p class="text-xs text-gray-600"><strong>Role:</strong> ML Developer. Optimized the pipeline for real-time processing and improved recognition.</p>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-
-                    <!-- Project Card 4: Student Record Management System -->
-                    <div class="project-card scroll-reveal">
-                        <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
-                           <div class="project-card-front bg-white p-6 rounded-xl">
-                               <div>
-                                   <i data-lucide="users-round" class="w-8 h-8 text-indigo-600 mb-4"></i>
-                                   <h3 class="text-xl font-bold text-gray-900 mb-2">Student Record System</h3>
-                                   <p class="text-sm text-gray-600">A robust desktop application developed in Java for efficient student data management and persistent storage.</p>
-                               </div>
-                               <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
-                           </div>
-                           <div class="project-card-back bg-gray-50 p-6 rounded-xl">
-                               <div>
-                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
-                                   <div class="flex flex-wrap gap-2 mb-4">
-                                       <span class="skill-badge">Java</span>
-                                       <span class="skill-badge">File Handling</span>
-                                       <span class="skill-badge">OOP</span>
-                                   </div>
-                               </div>
-                               <div>
-                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
-                                   <p class="text-xs text-gray-600"><strong>Role:</strong> Software Developer. Implemented secure and efficient CRUD operations for large datasets.</p>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-
-                    <!-- Project Card 5: Doctor's Dashboard Website -->
-                    <div class="project-card scroll-reveal">
-                        <div class="project-card-inner card-hover-lift rounded-xl shadow-xl border border-indigo-100">
-                           <div class="project-card-front bg-white p-6 rounded-xl">
-                               <div>
-                                   <i data-lucide="stethoscope" class="w-8 h-8 text-indigo-600 mb-4"></i>
-                                   <h3 class="text-xl font-bold text-gray-900 mb-2">Doctor's Dashboard UI</h3>
-                                   <p class="text-sm text-gray-600">Designed a responsive, modern UI for a medical dashboard, prioritizing data visualization and scheduling.</p>
-                               </div>
-                               <div class="text-xs text-indigo-600 font-semibold self-end mt-4">Hover for details</div>
-                           </div>
-                           <div class="project-card-back bg-gray-50 p-6 rounded-xl">
-                               <div>
-                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Tech Stack</h4>
-                                   <div class="flex flex-wrap gap-2 mb-4">
-                                       <span class="skill-badge">HTML/CSS</span>
-                                       <span class="skill-badge">JavaScript</span>
-                                       <span class="skill-badge">Responsive UI</span>
-                                   </div>
-                               </div>
-                               <div>
-                                   <h4 class="text-lg font-bold text-indigo-700 mb-2">Role & Outcome</h4>
-                                   <p class="text-xs text-gray-600"><strong>Role:</strong> Frontend Developer. Created a modern, accessible interface using contemporary design principles.</p>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-
-                </div>
-            </section>
-
-            <!-- 4. Research & Publications Section -->
-            <section id="research" class="mb-24 scroll-reveal-left">
-                <h2 class="text-4xl font-extrabold text-indigo-600 mb-10 section-title">Research & Publications</h2>
-                
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 divide-y divide-gray-100 card-hover-lift">
-                    
-                    <!-- Paper 1 -->
-                    <div class="py-4">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-1">Intelligent Surveillance Using YOLOv8 and OCR for Real-time Monitoring</h3>
-                        <p class="text-sm text-gray-600 mb-2">
-                            <i data-lucide="calendar" class="w-4 h-4 inline mr-1 text-indigo-500"></i> Year: 2024 | 
-                            <i data-lucide="book-open" class="w-4 h-4 inline mr-1 text-indigo-500"></i> Domain: AI, Computer Vision, IoT
-                        </p>
-                        <a href="#" class="link-underline text-indigo-600 hover:text-indigo-800 text-sm font-medium transition duration-150">
-                            View Paper Link (Placeholder) 
-                            <i data-lucide="external-link" class="w-4 h-4 inline ml-1"></i>
-                        </a>
+                    <!-- Project 4 -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="desktop">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop&q=80"
+                            alt="Student Record System" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Student Record System</h3>
+                            <p class="text-gray-400 text-sm mb-4">Robust Java desktop application for efficient student
+                                data management and persistent storage.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">Java</span>
+                                <span class="skill-badge-sm">File Handling</span>
+                                <span class="skill-badge-sm">OOP</span>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <!-- Paper 2 -->
-                    <div class="py-4">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-1">Optimizing Edge Computing for Smart Campus Security Systems</h3>
-                        <p class="text-sm text-gray-600 mb-2">
-                            <i data-lucide="calendar" class="w-4 h-4 inline mr-1 text-indigo-500"></i> Year: 2023 | 
-                            <i data-lucide="book-open" class="w-4 h-4 inline mr-1 text-indigo-500"></i> Domain: IoT, Embedded Systems, Network Architecture
-                        </p>
-                        <a href="#" class="link-underline text-indigo-600 hover:text-indigo-800 text-sm font-medium transition duration-150">
-                            View Conference Page (Placeholder) 
-                            <i data-lucide="external-link" class="w-4 h-4 inline ml-1"></i>
-                        </a>
+
+                    <!-- Project 5 -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="web">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop&q=80"
+                            alt="Doctor's Dashboard UI" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Doctor's Dashboard UI</h3>
+                            <p class="text-gray-400 text-sm mb-4">Responsive, modern UI for a medical dashboard,
+                                prioritizing data visualization and scheduling.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">HTML/CSS</span>
+                                <span class="skill-badge-sm">JavaScript</span>
+                                <span class="skill-badge-sm">Responsive UI</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </section>
 
-            <!-- 5. Skills Section -->
-            <section id="skills" class="mb-24">
-                <h2 class="text-4xl font-extrabold text-indigo-600 mb-10 text-center section-title scroll-reveal">Interactive Skills Globe</h2>
-                
-                <div id="skill-globe-container" class="w-full h-96 md:h-[500px] flex items-center justify-center scroll-reveal">
-                    <canvas width="800" height="600" id="skill-canvas">
-                        <p>Your browser does not support the canvas element.</p>
-                    </canvas>
-                </div>
+                    <!-- NEW: Project 6: Inventory Management -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="desktop">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop&q=80"
+                            alt="Inventory Management System" class="w-full h-48 object-cover" loading="lazy"
+                            decoding="async" width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Inventory Management & Billing</h3>
+                            <p class="text-gray-400 text-sm mb-4">A comprehensive system for tracking stock, managing
+                                suppliers, and generating invoices.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">Python</span>
+                                <span class="skill-badge-sm">SQL</span>
+                                <span class="skill-badge-sm">Tkinter</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <div id="skill-tags" class="hidden">
-                    <ul>
-                        <li><a href="#" data-weight="25">Python</a></li>
-                        <li><a href="#" data-weight="23">Java</a></li>
-                        <li><a href="#" data-weight="20">JavaScript</a></li>
-                        <li><a href="#" data-weight="28">YOLOv8</a></li>
-                        <li><a href="#" data-weight="26">EasyOCR</a></li>
-                        <li><a href="#" data-weight="24">TensorFlow</a></li>
-                        <li><a href="#" data-weight="22">OpenCV</a></li>
-                        <li><a href="#" data-weight="25">Flask/Django</a></li>
-                        <li><a href="#" data-weight="21">HTML/CSS</a></li>
-                        <li><a href="#" data-weight="23">SQL</a></li>
-                        <li><a href="#" data-weight="27">IoT</a></li>
-                        <li><a href="#" data-weight="26">Arduino/ESP32</a></li>
-                        <li><a href="#" data-weight="20">Git</a></li>
-                        <li><a href="#" data-weight="19">Linux</a></li>
-                        <li><a href="#" data-weight="24">Systems Design</a></li>
-                        <li><a href="#" data-weight="22">OOP</a></li>
-                        <li><a href="#" data-weight="21">C</a></li>
-                        <li><a href="#" data-weight="23">Edge Computing</a></li>
-                    </ul>
-                </div>
-            </section>
+                    <!-- NEW: Project 7: E-commerce Website -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="web">
+                        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop&q=80"
+                            alt="E-commerce Website" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Full-Stack Shopping Website</h3>
+                            <p class="text-gray-400 text-sm mb-4">A complete e-commerce platform with product listings,
+                                user cart, and checkout process.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">HTML/CSS</span>
+                                <span class="skill-badge-sm">Node.js</span>
+                                <span class="skill-badge-sm">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
 
-        </div> <!-- End of main content container -->
+                    <!-- NEW: Project 8: Payroll Software -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="desktop">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop&q=80"
+                            alt="Payroll Software" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">C++ Payroll Software</h3>
+                            <p class="text-gray-400 text-sm mb-4">A console-based application for managing employee
+                                salaries, deductions, and tax calculations.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">C++</span>
+                                <span class="skill-badge-sm">MongoDB</span>
+                                <span class="skill-badge-sm">OOP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NEW: Project 9: Arduino Black Box -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="iot">
+                        <img src="https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=600&h=400&fit=crop&q=80"
+                            alt="Arduino Black Box" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Vehicle Black Box System</h3>
+                            <p class="text-gray-400 text-sm mb-4">An Arduino Uno-based system to log vehicle data
+                                (speed, impact) to an SD card for accident analysis.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">Arduino</span>
+                                <span class="skill-badge-sm">C/C++</span>
+                                <span class="skill-badge-sm">IoT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NEW: Project 10: Attendance Register -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="web">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&q=80"
+                            alt="Attendance Register" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Attendance Register</h3>
+                            <p class="text-gray-400 text-sm mb-4">A web app for managing student attendance with Admin,
+                                Teacher, and Student roles.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">Python</span>
+                                <span class="skill-badge-sm">Flask</span>
+                                <span class="skill-badge-sm">SQL</span>
+                                <span class="skill-badge-sm">HTML/CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NEW: Project 11: Hand Sign to Speech -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="ai">
+                        <img src="https://images.unsplash.com/photo-1527576539890-dfa815648363?w=600&h=400&fit=crop&q=80"
+                            alt="Hand Sign to Speech" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Hand Sign to Speech</h3>
+                            <p class="text-gray-400 text-sm mb-4">A desktop app to recognize hand signs in real-time and
+                                convert them to spoken audio.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">Python</span>
+                                <span class="skill-badge-sm">MediaPipe</span>
+                                <span class="skill-badge-sm">Tkinter</span>
+                                <span class="skill-badge-sm">OpenCV</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NEW: Project 12: Expense Tracker -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="web">
+                        <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&h=400&fit=crop&q=80"
+                            alt="Expense Tracker" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Expense Tracker</h3>
+                            <p class="text-gray-400 text-sm mb-4">A web app for logging expenses and visualizing
+                                spending habits with charts.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">Node.js</span>
+                                <span class="skill-badge-sm">Express</span>
+                                <span class="skill-badge-sm">MongoDB</span>
+                                <span class="skill-badge-sm">HTML/CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NEW: Project 13: Multi-Language Online Compiler -->
+                    <div class="project-card glass-card rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-xl stagger-child"
+                        data-category="web">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop&q=80"
+                            alt="Online Compiler" class="w-full h-48 object-cover" loading="lazy" decoding="async"
+                            width="600" height="400">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Multi-Language Online Compiler</h3>
+                            <p class="text-gray-400 text-sm mb-4">A secure web-based IDE to compile and run code in
+                                multiple languages using Docker.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge-sm">Python</span>
+                                <span class="skill-badge-sm">Flask</span>
+                                <span class="skill-badge-sm">Docker</span>
+                                <span class="skill-badge-sm">SQLite</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
     </main>
-    
-    <!-- 6. Contact Section (Footer) -->
-    <footer id="contact" class="bg-gray-900 text-white py-16 scroll-reveal-right relative overflow-hidden">
-        <!-- Animated Background Pattern -->
-        <div class="absolute inset-0 opacity-5">
-            <div class="absolute top-0 left-0 w-96 h-96 bg-indigo-500 rounded-full filter blur-3xl animate-pulse"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <h2 class="text-4xl font-extrabold text-indigo-400 mb-4 text-center">Let's Connect</h2>
-            <p class="text-xl text-gray-400 mb-12 text-center">
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-slate-900 pt-24 pb-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <h2 class="text-5xl font-extrabold text-center mb-6 text-indigo-400">
+                What's Next?
+            </h2>
+            <p class="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">
                 Open to collaborations in AI, IoT, and software systems. Let's build something impactful.
             </p>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                
-                <!-- Social Links -->
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-semibold text-white mb-4">Find Me Online</h3>
-                    <div class="space-y-3">
-                        <a href="mailto:bharanisri73@gmail.com" class="flex items-center text-gray-300 hover:text-indigo-400 transition-all duration-300 group card-hover-lift p-3 rounded-lg bg-gray-800/50 backdrop-blur-sm">
-                            <i data-lucide="mail" class="w-6 h-6 mr-3 text-indigo-500 group-hover:text-indigo-400 transition-transform group-hover:scale-110"></i>
-                            <span class="text-lg">bharanisri73@gmail.com</span>
-                        </a>
-                        <a href="https://github.com/bharani-01" target="_blank" class="flex items-center text-gray-300 hover:text-indigo-400 transition-all duration-300 group card-hover-lift p-3 rounded-lg bg-gray-800/50 backdrop-blur-sm">
-                            <i data-lucide="github" class="w-6 h-6 mr-3 text-indigo-500 group-hover:text-indigo-400 transition-transform group-hover:scale-110"></i>
-                            <span class="text-lg">GitHub/bharani-01</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/bharani-k-r-45a950354/" target="_blank" class="flex items-center text-gray-300 hover:text-indigo-400 transition-all duration-300 group card-hover-lift p-3 rounded-lg bg-gray-800/50 backdrop-blur-sm">
-                            <i data-lucide="linkedin" class="w-6 h-6 mr-3 text-indigo-500 group-hover:text-indigo-400 transition-transform group-hover:scale-110"></i>
-                            <span class="text-lg">LinkedIn/bharani-k-r-45a950354</span>
-                        </a>
-                        <a href="tel:+919363725862" class="flex items-center text-gray-300 hover:text-indigo-400 transition-all duration-300 group card-hover-lift p-3 rounded-lg bg-gray-800/50 backdrop-blur-sm">
-                            <i data-lucide="phone" class="w-6 h-6 mr-3 text-indigo-500 group-hover:text-indigo-400 transition-transform group-hover:scale-110"></i>
-                            <span class="text-lg">+91 9363725862</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-2xl card-hover-lift backdrop-blur-sm bg-opacity-80">
-                    <h3 class="text-2xl font-semibold text-white mb-4">Send a Message</h3>
-                    <form id="contact-form" class="space-y-4">
-                        <!-- TODO: Replace with your Web3Forms Access Key -->
-                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-                        
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300">
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
-                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"></textarea>
-                        </div>
-                        <button type="submit" class="w-full px-4 py-2 text-lg font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 shadow-md transform hover:scale-105">
-                            Send Message
-                        </button>
-                    </form>
-                    <div id="form-message" class="mt-4 text-center hidden p-3 rounded-lg text-sm transition-all duration-300"></div>
-                </div>
+            <div class="text-center mb-16">
+                <a href="mailto:bharanisri73@gmail.com"
+                    class="inline-block bg-indigo-600 text-white text-2xl font-bold px-10 py-5 rounded-lg shadow-lg shadow-indigo-600/40 hover:bg-indigo-500 transition-all duration-300 transform hover:scale-105">
+                    Write me an email
+                </a>
+                <p class="text-gray-400 mt-4 text-lg">bharanisri73@gmail.com</p>
             </div>
 
-            <div class="mt-16 text-center text-gray-500 text-sm border-t border-gray-800 pt-8">
+            <div class="flex justify-center space-x-6 md:space-x-8 mb-12">
+                <a href="https://github.com/bharani-01" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-indigo-400 transition-transform duration-300 transform hover:scale-110"
+                    aria-label="GitHub">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/bharani-k-r-45a950354/" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-indigo-400 transition-transform duration-300 transform hover:scale-110"
+                    aria-label="LinkedIn">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+                <a href="tel:+919363725862"
+                    class="text-gray-400 hover:text-indigo-400 transition-transform duration-300 transform hover:scale-110"
+                    aria-label="Phone">
+                    <svg class="w-8 h-8" fill="currentColor" version="1.1" id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 512 512" xml:space="preserve">
+                        <path
+                            d="M436,419.1c-15.3-21.3-33.1-39.7-52.9-54.3c-20.3-15-42.5-22-65.7-22c-23.3,0-45.6,7-65.7,22c-19.8,14.7-37.6,33-52.9,54.3c-10.8,15-25.5,22.3-41.5,22.3c-10.4,0-20.4-3.2-29.2-9.5c-19-13.4-23.7-39.1-10.2-58.1c21.3-29.8,47.4-54.7,77.4-74c30.6-19.6,63.9-29.2,98.6-29.2c34.6,0,68,9.6,98.6,29.2c30,19.3,56.1,44.2,77.4,74c13.4,19,8.8,44.7-10.2,58.1c-8.8,6.2-18.8,9.5-29.2,9.5C461.5,441.4,446.8,434.1,436,419.1z M340.5,268.4c-20.9,0-40.4-3.9-58.1-11.4c-17.5-7.4-33.3-18.2-47.3-31.9c-14.2-13.8-25.3-29.8-32.9-47.8c-7.7-18.2-11.7-37.9-11.7-58.6c0-23.2,7-45.3,20.8-65.4c13.7-19.9,32.7-33,55.5-37.5c11.3-2.2,22.8-1.7,33.9,1.4c11.1,3.1,21.5,8.8,30.6,16.7l46,40.1c11.1,9.7,17.4,23.3,17.4,37.8c0,14.6-6.2,28.3-17.2,38.2l-28.9,26.1c-4.1,3.7-5.2,9.7-2.7,14.7c10.3,20.2,25.2,38.2,44,53.2c18.9,15.1,39.9,26.4,62.2,33.1c5.2,1.6,10.7,0.4,14.4-3.4l28.6-25.9c10-9,23.6-14.4,38.2-14.4c14.6,0,28.3,6.2,38.2,17.2l40.1,46c7.9,9.1,13.6,19.5,16.7,30.6c3.1,11.1,3.6,22.6,1.4,33.9c-4.5,22.8-17.6,41.8-37.5,55.5C385.8,261.4,363.7,268.4,340.5,268.4z" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="mt-16 text-center text-gray-500 text-sm border-t border-gray-700/50 pt-8">
                 &copy; 2024 Bharani. Built with passion and code.
             </div>
         </div>
     </footer>
 
-    <!-- Load TagCanvas for skills globe -->
-    <script src="//www.goat1000.com/tagcanvas.min.js" type="text/javascript"></script>
+    <!-- Image Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[60]">
+        <button id="lightboxClose" class="absolute top-6 right-6 text-white/80 hover:text-white"
+            aria-label="Close image">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <img id="lightboxImg" alt="Project preview" class="max-w-[90vw] max-h-[80vh] rounded-lg shadow-2xl" />
+    </div>
 
-    <!-- JavaScript for Enhanced Interactivity and Professional Animations -->
+    <!-- Scroll To Top Button -->
+    <button id="scrollTopBtn" title="Back to top"
+        class="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white p-3 rounded-full shadow-lg shadow-indigo-600/30 hover:bg-indigo-500 transition-all duration-300 transform hover:scale-105 opacity-0 pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+        <span class="sr-only">Back to top</span>
+    </button>
+
+
+    <!-- JavaScript for Mobile Menu and Smooth Scroll -->
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('menu-icon-open');
+            const iconClose = document.getElementById('menu-icon-close');
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            const typewriterEl = document.getElementById('typewriter');
 
-        // === PARTICLE EFFECT GENERATOR ===
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles-container');
-            if (!particlesContainer) return;
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        // Initialize particles
-        createParticles();
-
-        // === MOBILE MENU LOGIC ===
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            const icon = mobileMenuButton.querySelector('svg');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.setAttribute('data-lucide', 'menu');
-            } else {
-                icon.setAttribute('data-lucide', 'x');
-            }
-            lucide.createIcons();
-        });
-
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenuButton.querySelector('svg').setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
+            // Toggle mobile menu
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                iconOpen.classList.toggle('hidden');
+                iconClose.classList.toggle('hidden');
             });
-        });
 
-        // === CONTACT FORM HANDLING ===
-        const contactForm = document.getElementById('contact-form');
-        const formMessage = document.getElementById('form-message');
-
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Animate button on submit and disable it
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            submitButton.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 inline animate-spin"></i> Sending...';
-            submitButton.disabled = true;
-            lucide.createIcons();
-            
-            const formData = new FormData(contactForm);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
-            formMessage.classList.add('hidden');
-
-            fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: json
-                })
-                .then(async (response) => {
-                    let jsonResponse = await response.json();
-                    if (response.status == 200) {
-                        formMessage.textContent = jsonResponse.message || 'Thank you! Your message has been sent.';
-                        formMessage.classList.remove('hidden', 'text-red-400', 'bg-red-900/50');
-                        formMessage.classList.add('bg-green-900/50', 'text-green-300');
-                        contactForm.reset();
-                    } else {
-                        formMessage.textContent = jsonResponse.message || 'Something went wrong. Please try again.';
-                        formMessage.classList.remove('hidden', 'text-green-300', 'bg-green-900/50');
-                        formMessage.classList.add('bg-red-900/50', 'text-red-400');
-                    }
-                })
-                .catch(error => {
-                    formMessage.textContent = 'An error occurred. Please check your connection and try again.';
-                    formMessage.classList.remove('hidden', 'text-green-300', 'bg-green-900/50');
-                    formMessage.classList.add('bg-red-900/50', 'text-red-400');
-                })
-                .finally(() => {
-                    submitButton.innerHTML = 'Send Message';
-                    submitButton.disabled = false;
-                     setTimeout(() => {
-                        formMessage.classList.add('hidden');
-                    }, 6000);
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
                 });
-        });
+            });
 
-        // === STICKY HEADER EFFECT ===
-        const header = document.getElementById('navbar');
-        let lastScroll = 0;
+            // Smooth scroll for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
 
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            // Add shadow on scroll
-            if (currentScroll > 50) {
-                header.classList.add('shadow-xl');
-            } else {
-                header.classList.remove('shadow-xl');
-                header.classList.add('shadow-md');
-            }
-            
-            // Hide/show header on scroll
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
-            }
-            
-            lastScroll = currentScroll;
-        });
+                    if (targetElement) {
+                        const headerOffset = 80; // Height of the fixed header
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-        // === ENHANCED INTERSECTION OBSERVER FOR SCROLL ANIMATIONS ===
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        // Main scroll reveal observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = entry.target;
-                    
-                    // Stagger animations for cards
-                    if (target.classList.contains('project-card') || target.classList.contains('skill-card')) {
-                        const index = Array.from(target.parentNode.children).indexOf(target);
-                        target.style.animationDelay = `${index * 0.15}s`;
-                    } else {
-                        target.style.animationDelay = '0s';
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
                     }
-                    
-                    target.classList.add('animate-in');
-                    
-                    // Animate section titles
-                    if (target.classList.contains('section-title')) {
-                        setTimeout(() => {
-                            target.classList.add('animate-in');
-                        }, 200);
-                    }
-                    
-                    observer.unobserve(target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe all scroll-reveal elements
-        document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Observe section titles
-        document.querySelectorAll('.section-title').forEach(el => {
-            observer.observe(el);
-        });
-
-        // === TYPEWRITER EFFECT COMPLETION ===
-        // After typewriter animation completes, remove the border
-        const typewriterElement = document.querySelector('.typewriter-text');
-        if (typewriterElement) {
-            setTimeout(() => {
-                typewriterElement.style.borderRight = 'none';
-            }, 3500); // After typewriter + blink animations
-        }
-
-        // === ACTIVE NAV LINK HIGHLIGHT ===
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
+                });
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('text-indigo-600', 'font-bold');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('text-indigo-600', 'font-bold');
+            // Hide header on scroll down, show on scroll up
+            let lastScrollTop = 0;
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function () {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scroll Down
+                    navbar.style.transform = 'translateY(-100%)';
+                } else {
+                    // Scroll Up
+                    navbar.style.transform = 'translateY(0)';
                 }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+
+                // Toggle Scroll-To-Top button visibility
+                if (scrollTop > 300) {
+                    scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                } else {
+                    scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                }
+            }, false);
+
+            // Scroll to top on click
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-        });
 
-        // === SMOOTH SCROLL WITH OFFSET FOR FIXED HEADER ===
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerOffset = 80;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            // === NEW: Intersection Observer for Scroll Animations ===
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
 
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
+                            // Stagger children animation
+                            const children = entry.target.querySelectorAll('.stagger-child');
+                            children.forEach((child, index) => {
+                                child.style.animationDelay = `${index * 0.1}s`;
+                            });
+
+                            observer.unobserve(entry.target);
+                        }
                     });
+                }, {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                });
+
+                // Observe all elements with the .animate-on-scroll class
+                animateElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                // Fallback for older browsers (just show the elements)
+                animateElements.forEach(el => {
+                    el.classList.add('is-visible');
+                    el.style.opacity = 1; // Ensure it's visible
+                    el.style.transform = 'none';
+                });
+            }
+
+            // === NEW: Animate hero elements on load ===
+            document.querySelectorAll('#home .animate-on-scroll').forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('is-visible');
+                }, index * 100);
+            });
+
+            // Typewriter effect
+            if (typewriterEl) {
+                const phrases = [
+                    'AI & Intelligent Systems Developer',
+                    'Edge AI and IoT Enthusiast',
+                    'Full-Stack Engineer'
+                ];
+                let pi = 0, ci = 0, deleting = false;
+                function tick() {
+                    const full = phrases[pi];
+                    if (!deleting) {
+                        ci++;
+                        typewriterEl.textContent = full.slice(0, ci);
+                        if (ci === full.length) {
+                            deleting = true;
+                            setTimeout(tick, 1200); return;
+                        }
+                    } else {
+                        ci--;
+                        typewriterEl.textContent = full.slice(0, ci);
+                        if (ci === 0) {
+                            deleting = false;
+                            pi = (pi + 1) % phrases.length;
+                        }
+                    }
+                    setTimeout(tick, deleting ? 45 : 85);
                 }
-            });
-        });
+                setTimeout(tick, 800);
+            }
 
-        // === DYNAMIC CURSOR EFFECT (Optional, for desktop) ===
-        if (window.innerWidth > 768) {
-            const cursor = document.createElement('div');
-            cursor.style.cssText = `
-                position: fixed;
-                width: 20px;
-                height: 20px;
-                border: 2px solid rgba(99, 102, 241, 0.5);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                transition: transform 0.15s ease, border-color 0.15s ease;
-                display: none;
-                mix-blend-mode: difference;
-            `;
-            document.body.appendChild(cursor);
-
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.display = 'block';
-                cursor.style.left = e.clientX - 10 + 'px';
-                cursor.style.top = e.clientY - 10 + 'px';
-            });
-
-            // Scale cursor on interactive elements
-            document.querySelectorAll('a, button, .card-hover-lift').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(1.5)';
-                    cursor.style.borderColor = 'rgba(255, 255, 255, 0.8)';
+            // Stats counters (dynamic)
+            const counters = document.querySelectorAll('#stats .counter');
+            if (counters.length) {
+                const values = {
+                    projects: () => document.querySelectorAll('#projects .project-card').length,
+                    skills: () => document.querySelectorAll('#skillset .skill-badge, #skillset .skill-badge-sm').length,
+                    domains: () => new Set(Array.from(document.querySelectorAll('#projects .project-card'))
+                        .map(el => el.getAttribute('data-category'))).size
+                };
+                const setTargets = () => counters.forEach(c => {
+                    const src = c.getAttribute('data-source');
+                    const v = values[src] ? values[src]() : 0;
+                    c.dataset.target = String(v);
                 });
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
-                    cursor.style.borderColor = 'rgba(99, 102, 241, 0.5)';
+                setTargets();
+
+                const animateCount = (el) => {
+                    const target = parseInt(el.dataset.target || '0', 10);
+                    let current = 0;
+                    const step = Math.max(1, Math.ceil(target / 60));
+                    const inc = () => {
+                        current += step;
+                        if (current >= target) { el.textContent = String(target); return; }
+                        el.textContent = String(current);
+                        requestAnimationFrame(inc);
+                    };
+                    inc();
+                };
+
+                const statsObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            counters.forEach(animateCount);
+                            statsObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                const statsEl = document.getElementById('stats');
+                if (statsEl) statsObserver.observe(statsEl);
+            }
+
+            // Project filter
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('#projects .project-card');
+            if (filterBtns.length && cards.length) {
+                filterBtns.forEach(btn => btn.addEventListener('click', () => {
+                    const f = btn.dataset.filter;
+                    filterBtns.forEach(b => b.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-500', 'shadow-indigo-600/30'));
+                    btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-500', 'shadow-indigo-600/30');
+                    cards.forEach(card => {
+                        const cat = card.getAttribute('data-category');
+                        const show = f === 'all' || f === cat;
+                        card.style.display = show ? '' : 'none';
+                    });
+                }));
+            }
+
+            // Lightbox for project images
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxClose = document.getElementById('lightboxClose');
+            if (lightbox && lightboxImg) {
+                document.querySelectorAll('#projects img').forEach(img => {
+                    img.style.cursor = 'zoom-in';
+                    img.addEventListener('click', () => {
+                        lightboxImg.src = img.src.replace(/([?&])w=\d+&h=\d+/, '$1w=1200&h=800');
+                        lightbox.classList.remove('hidden');
+                        lightbox.classList.add('flex');
+                    });
                 });
+                const closeLb = () => { lightbox.classList.add('hidden'); lightbox.classList.remove('flex'); };
+                lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLb(); });
+                if (lightboxClose) lightboxClose.addEventListener('click', closeLb);
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
+            }
+
+            // Tilt effect on project cards
+            const tiltCards = document.querySelectorAll('#projects .project-card');
+            tiltCards.forEach(card => {
+                const dampen = 20; // lower = stronger tilt
+                const rectCache = { w: 0, h: 0 };
+                const updateRect = () => { const r = card.getBoundingClientRect(); rectCache.w = r.width; rectCache.h = r.height; };
+                updateRect();
+                card.addEventListener('mousemove', (e) => {
+                    const r = card.getBoundingClientRect();
+                    const x = e.clientX - r.left - r.width / 2;
+                    const y = e.clientY - r.top - r.height / 2;
+                    const rx = (y / dampen);
+                    const ry = (-x / dampen);
+                    card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+                window.addEventListener('resize', updateRect);
             });
-        }
 
-        // === LOADING ANIMATION ===
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 0.5s ease';
-                document.body.style.opacity = '1';
-            }, 100);
-        });
+            // === NEW: Scroll Spy to highlight active nav link ===
+            const sectionIds = ['#home', '#about', '#skillset', '#projects', '#contact'];
+            const navLinks = Array.from(document.querySelectorAll('header nav a[href^="#"]'));
+            const sectionMap = new Map();
+            sectionIds.forEach(id => {
+                const el = document.querySelector(id);
+                if (el) sectionMap.set(id, el);
+            });
 
-        // === SKILLS GLOBE INITIALIZATION ===
-        window.addEventListener('load', () => {
-             try {
-                TagCanvas.Start('skill-canvas', 'skill-tags', {
-                    textColour: '#4338ca',
-                    outlineColour: '#c7d2fe',
-                    reverse: true,
-                    depth: 0.9,
-                    maxSpeed: 0.04,
-                    initial: [0.1,-0.1],
-                    weight: true,
-                    weightMode: 'size',
-                    weightSize: 1.2,
-                    dragControl: true,
-                    noSelect: true,
-                    textFont: 'Inter, sans-serif',
-                    textHeight: 20,
-                    shadow: '#c7d2fe',
-                    shadowBlur: 5
+            if ('IntersectionObserver' in window) {
+                const spy = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const id = '#' + entry.target.id;
+                        if (sectionIds.includes(id)) {
+                            const link = navLinks.find(a => a.getAttribute('href') === id);
+                            if (link) {
+                                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                                    navLinks.forEach(a => {
+                                        a.classList.remove('text-white', 'font-semibold');
+                                        a.classList.add('text-gray-300');
+                                        a.removeAttribute('aria-current');
+                                    });
+                                    link.classList.remove('text-gray-300');
+                                    link.classList.add('text-white', 'font-semibold');
+                                    link.setAttribute('aria-current', 'page');
+                                }
+                            }
+                        }
+                    });
+                }, { root: null, threshold: [0.55] });
+
+                sectionMap.forEach((el) => spy.observe(el));
+            }
+
+            // === MODIFIED: Hacking "Matrix" Canvas Animation ===
+            const canvas = document.getElementById('particle-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let width, height;
+
+                const setCanvasSize = () => {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = canvas.parentElement.offsetHeight;
+                };
+                setCanvasSize();
+
+                const chars = "01 ABCDEF 0123456789"; // Character set
+                const columns = Math.floor(width / 20);
+                const drops = [];
+
+                for (let i = 0; i < columns; i++) {
+                    drops[i] = 1;
+                }
+
+                function draw() {
+                    // Use the site's background color with low alpha for the trail effect
+                    ctx.fillStyle = 'rgba(15, 23, 42, 0.05)';
+                    ctx.fillRect(0, 0, width, height);
+
+                    // Use the site's theme color for the text
+                    ctx.fillStyle = '#818cf8'; // indigo-400
+                    ctx.font = '15px Inter';
+
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = chars[Math.floor(Math.random() * chars.length)];
+                        ctx.fillText(text, i * 20, drops[i] * 20);
+
+                        if (drops[i] * 20 > height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+                        drops[i]++;
+                    }
+                }
+
+                let interval = setInterval(draw, 33);
+
+                // Re-init on resize
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => {
+                        setCanvasSize();
+                        // Recalculate columns and reset drops array
+                        const newColumns = Math.floor(width / 20);
+                        drops.length = 0; // Clear old array
+                        for (let i = 0; i < newColumns; i++) {
+                            drops[i] = 1;
+                        }
+                        // Clear and restart interval
+                        if (interval) clearInterval(interval);
+                        interval = setInterval(draw, 33);
+                    }, 100);
                 });
-            } catch(e) {
-                // In case of error, hide the canvas container
-                document.getElementById('skill-globe-container').style.display = 'none';
             }
         });
-
-
     </script>
+
 </body>
+
 </html>
